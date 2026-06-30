@@ -1,4 +1,11 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Aplikacja do oferowania noclegów na kempingach, kempingach glampingowych lub w obiektach noclegowych poza siecią.Responsywność mobilna na wszystkich rozmiarach ekranów, wieloetapowy formularz do rezerwacji.Aplikacja typu SaaS.Z blokirm planów subskrypcyjnych. Każdy obiekt jest swoją oddzielną stroną internetową, dostępną pod własną subdomeną. W przyszłości planowane jest dodanie możliwości integracji z systemami rezerwacji, systemami płatności, systemami do zarządzania zasobami, itp.  
+wachlarzowymi kartami wyróżnionych lokalizacji, katalog lokalizacji z sortowaniem według cen i ocen, wyszukiwarka lokalizacji, strona główna z mapą i wyszukiwarką lokalizacji.
+Dla kogo to jest?
+Właściciele ośrodków wypoczynkowych, których obecna strona internetowa nie konwertuje odwiedzających na rezerwacje, ponieważ ta zapewnia wieloetapowy proces rezerwacji i profesjonalną prezentację od razu po wyjęciu z pudełka
+Przedsiębiorcy oferujący usługi glampingu, którzy otwierają nowy obiekt i potrzebują miejsca, które zbuduje zaufanie jeszcze przed przybyciem gości, a nie uniwersalnego szablonu, który wtapia się w otoczenie.
+Operatorzy ekoturystyki wydają zbyt dużo pieniędzy na platformy rezerwacyjne, ponieważ zastępują one miesięczne opłaty witryną, którą posiadasz i kontrolujesz
+Menedżerowie kempingów żonglują arkuszami kalkulacyjnymi do rezerwacji, ponieważ panel administracyjny i śledzenie rezerwacji wyświetlają wszystko w jednym widoku
+Agencje hotelarskie budują strony internetowe dla klientów oferujących pobyty butikowe, którzy oczekują projektów o jakości redakcyjnej bez niestandardowych terminów realizacji
 
 ## Getting Started
 
