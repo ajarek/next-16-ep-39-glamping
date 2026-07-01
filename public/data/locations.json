@@ -1,0 +1,67 @@
+[
+  {
+    "id": "forest-haven",
+    "name": "Forest Haven",
+    "locationName": "Pacific Northwest",
+    "description": "Ustronne miejsce pośród wiekowych sosen i cedrów, idealne na odpoczynek w ciszy.",
+    "price": 85,
+    "rating": 4.9,
+    "image": "/images/forest-haven.png",
+    "tags": ["Prywatne obozowisko", "Miejsce na ognisko", "Prysznic solarny"],
+    "coords": { "x": 28, "y": 45 },
+    "details": "Forest Haven oferuje niezrównane poczucie prywatności. Położony w głębi dziewiczego lasu deszczowego Pacific Northwest, ten kemping jest wyposażony w luksusowy namiot safari posadowiony na drewnianym podeście. Do dyspozycji gości jest w pełni wyposażone miejsce na ognisko z zapasem drewna oraz zewnętrzny, ekologiczny prysznic solarny z widokiem na korony drzew.",
+    "features": ["Namiot Safari", "Łóżko typu Queen-size", "Prywatny taras", "Ciepła woda (solarna)", "Zestaw do parzenia kawy", "Dostęp do szlaków pieszych"]
+  },
+  {
+    "id": "lakeside-retreat",
+    "name": "Lakeside Retreat",
+    "locationName": "Mountain Valley",
+    "description": "Luksusowa jurta tuż nad brzegiem krystalicznie czystego jeziora górskiego z wliczonym kajakiem.",
+    "price": 95,
+    "rating": 5.0,
+    "image": "/images/lakeside-retreat.png",
+    "tags": ["Nad wodą", "Kajak w cenie", "Toaleta kompostowa"],
+    "coords": { "x": 52, "y": 30 },
+    "details": "Lakeside Retreat to spełnienie marzeń o porankach z widokiem na taflę wody. Położona w malowniczej dolinie górskiej jurta łączy tradycyjny urok z nowoczesnym komfortem. W cenę pobytu wliczone jest korzystanie z dwuosobowego kajaka, którym można odkrywać zakątki jeziora. Wieczory umila szum wody i widok na oświetlone gwiazdami szczyty.",
+    "features": ["Luksusowa jurta", "Dwuosobowy kajak", "Prywatny pomost", "Kominek opalany drewnem", "Panele słoneczne do ładowania", "Grill gazowy"]
+  },
+  {
+    "id": "meadow-vista",
+    "name": "Meadow Vista",
+    "locationName": "Alpine Range",
+    "description": "Przeszklona kopuła z panoramicznym widokiem na pasmo alpejskie i nocne niebo.",
+    "price": 110,
+    "rating": 4.8,
+    "image": "/images/meadow-vista.png",
+    "tags": ["Widok panoramiczny", "Szlaki piesze", "Obserwacja dzikiej przyrody"],
+    "coords": { "x": 75, "y": 55 },
+    "details": "Meadow Vista to wyjątkowa kopuła geodezyjna zlokalizowana na wysokogórskiej łące. Przeszklony sufit pozwala zasypiać pod rozgwieżdżonym niebem i budzić się z widokiem na majestatyczne, ośnieżone szczyty. Otoczenie obfituje w szlaki turystyczne i daje unikalną okazję do obserwacji dzikich zwierząt w ich naturalnym środowisku.",
+    "features": ["Kopuła geodezyjna", "Przeszklony sufit", "Taras widokowy", "Ogrzewanie podłogowe", "Wewnętrzna łazienka", "Lornetka do obserwacji"]
+  },
+  {
+    "id": "river-edge",
+    "name": "River's Edge Glamp",
+    "locationName": "Valley Crossing",
+    "description": "Urocza chatka na drzewie zawieszona tuż nad szumiącym potokiem górskim.",
+    "price": 125,
+    "rating": 4.7,
+    "image": "/images/river-edge.png",
+    "tags": ["Chatka na drzewie", "Szum potoku", "Wanna zewnętrzna"],
+    "coords": { "x": 42, "y": 68 },
+    "details": "River's Edge Glamp to unikalna chatka na drzewie zlokalizowana w zakolu bystrej rzeki. Posiada duży taras z wolnostojącą wanną z hydromasażem, w której można relaksować się wsłuchując się w kojący szum płynącej wody. Wnętrze wykończone naturalnym drewnem modrzewiowym oferuje przytulny, rustykalny klimat.",
+    "features": ["Domek na drzewie", "Zewnętrzna wanna z jacuzzi", "Kominek elektryczny", "Balkon nad rzeką", "Kuchnia polowa", "Hamaki pod drzewami"]
+  },
+  {
+    "id": "canyon-hideout",
+    "name": "Canyon Hideout",
+    "locationName": "Red Rock Desert",
+    "description": "Klimatyzowany namiot safari ukryty w kanionie z czerwonego piaskowca.",
+    "price": 140,
+    "rating": 4.9,
+    "image": "/images/canyon-hideout.png",
+    "tags": ["Kanion", "Klimatyzacja", "Strefa stargazing"],
+    "coords": { "x": 88, "y": 25 },
+    "details": "Canyon Hideout oferuje nieziemskie wrażenia w sercu pustyni. Namiot ukryty jest między majestatycznymi ścianami z czerwonego piaskowca, zapewniając pełną prywatność i ochronę przed wiatrem. Namiot jest w pełni klimatyzowany, co zapewnia komfort w upalne dni. Na dachu platformy znajduje się specjalna strefa bez zanieczyszczenia światłem do obserwacji gwiazd.",
+    "features": ["Luksusowy namiot safari", "Klimatyzacja i ogrzewanie", "Teleskop do obserwacji gwiazd", "Zewnętrzne palenisko pustynne", "Prywatna łazienka", "WiFi satelitarne"]
+  }
+]

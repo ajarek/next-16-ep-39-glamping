@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ThemeProvider } from "./context/ThemeContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GlampingGO - Zaoferuj swój obiekt",
-  description: "GlampingGO to platforma do oferowania noclegów w campingu, glampingu lub hotelu. Wygodny i intuicyjny proces dodawania obiektów, i przekierowania na podstrony rezerwacyjne obiektów.",
+  title: "Wild Haven - Luksusowy Glamping i Portale Noclegowe",
+  description: "Platforma do rezerwacji luksusowych glampingów, namiotów safari, jurt i domków na drzewie. Odłącz się i połącz na nowo.",
 };
 
 export default function RootLayout({
@@ -27,7 +28,12 @@ export default function RootLayout({
       lang="pl"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col bg-bg-custom text-fg-custom transition-colors duration-300">
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
+
