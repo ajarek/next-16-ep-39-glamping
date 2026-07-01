@@ -40,7 +40,7 @@
   --color-brand-muted: var(--muted);
   --color-brand-muted-fg: var(--muted-foreground);
   --color-border-custom: var(--border);
-  
+
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
 }
@@ -49,7 +49,9 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), sans-serif;
-  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow-x: hidden;
 }
 
@@ -87,4 +89,3 @@ body {
   background: rgba(18, 24, 17, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
-
