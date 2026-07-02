@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { ThemeProvider } from "./context/ThemeContext"
+import ClientLayout from "./components/ClientLayout"
 import "./globals.css"
 
 const geistSans = Geist({
@@ -30,7 +31,10 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className='min-h-full flex flex-col bg-bg-custom text-fg-custom transition-colors duration-300'>
-        <ThemeProvider>{children}</ThemeProvider>
+        {/* ThemeProvider + ClientLayout zapewniają motyw i wspólny UI (Navbar, Footer) */}
+        <ThemeProvider>
+          <ClientLayout>{children}</ClientLayout>
+        </ThemeProvider>
       </body>
     </html>
   )

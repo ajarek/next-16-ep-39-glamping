@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, X, Compass, Info, DollarSign, Mail, Calendar } from "lucide-react";
+import Link from "next/link";
+import { Menu, X, Compass, Info, DollarSign, Mail, Calendar, Plus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
 
@@ -15,10 +16,9 @@ export default function Navbar({ onBookNow }: NavbarProps) {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const menuItems = [
-    { label: "LOKALIZACJE", href: "#locations", icon: Compass },
-    { label: "O NAS", href: "#about", icon: Info },
-    { label: "CENNIK SAAS", href: "#pricing", icon: DollarSign },
-    { label: "KONTAKT", href: "#contact", icon: Mail },
+    { label: "LOKALIZACJE", href: "/#locations", icon: Compass },
+    { label: "O NAS", href: "/#about", icon: Info },
+    { label: "KONTAKT", href: "/#contact", icon: Mail },
   ];
 
   return (
@@ -26,28 +26,36 @@ export default function Navbar({ onBookNow }: NavbarProps) {
       <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-border-custom bg-background/70 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
+          <Link href="/" className="flex items-center gap-2 group">
             <span className="text-xl font-bold tracking-widest text-brand-primary dark:text-brand-primary transition-colors">
               WILD HAVEN
             </span>
-          </a>
+          </Link>
 
           {/* Linki desktopowe */}
           <div className="hidden md:flex items-center gap-8">
             {menuItems.map((item) => (
-              <a
+              <Link
                 key={item.label}
                 href={item.href}
                 className="text-xs font-semibold tracking-widest text-fg-custom/80 hover:text-brand-accent transition-colors duration-250"
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </div>
 
           {/* Przyciski i przełącznik trybu */}
           <div className="hidden md:flex items-center gap-4">
             <ThemeToggle />
+            {/* Przycisk Dodaj Ofertę */}
+            <Link
+              href="/dodaj-oferte"
+              className="px-5 py-2.5 rounded-full text-xs font-semibold tracking-widest border border-border-custom text-fg-custom hover:bg-brand-muted/10 transition-all duration-300 flex items-center gap-1.5"
+            >
+              <Plus className="w-3.5 h-3.5" />
+              DODAJ OFERTĘ
+            </Link>
             <button
               onClick={onBookNow}
               className="px-6 py-2.5 rounded-full text-xs font-semibold tracking-widest bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-brand-accent-fg transition-all duration-300 shadow-md hover:shadow-lg"
@@ -109,7 +117,7 @@ export default function Navbar({ onBookNow }: NavbarProps) {
                 {/* Linki nawigacyjne */}
                 <div className="flex flex-col gap-5 mt-8">
                   {menuItems.map((item) => (
-                    <a
+                    <Link
                       key={item.label}
                       href={item.href}
                       onClick={toggleMenu}
@@ -117,8 +125,17 @@ export default function Navbar({ onBookNow }: NavbarProps) {
                     >
                       <item.icon className="w-5 h-5 text-brand-primary" />
                       {item.label}
-                    </a>
+                    </Link>
                   ))}
+                  {/* Dodaj ofertę link mobilny */}
+                  <Link
+                    href="/dodaj-oferte"
+                    onClick={toggleMenu}
+                    className="flex items-center gap-4 py-2 text-sm font-semibold tracking-wider text-brand-accent hover:text-brand-primary transition-colors"
+                  >
+                    <Plus className="w-5 h-5" />
+                    DODAJ OFERTĘ
+                  </Link>
                 </div>
               </div>
 

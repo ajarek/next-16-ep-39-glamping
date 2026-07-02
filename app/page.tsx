@@ -1,15 +1,12 @@
 "use client"
 
 import { useState } from "react"
-import Navbar from "./components/Navbar"
-import Hero from "./components/Hero"
 import FeaturedSpots from "./components/FeaturedSpots"
 import Catalog from "./components/Catalog"
 import LocationMap from "./components/LocationMap"
-import SubscriptionPlans from "./components/SubscriptionPlans"
-import Footer from "./components/Footer"
 import BookingModal from "./components/BookingModal"
 import DetailsModal from "./components/DetailsModal"
+import Hero from "./components/Hero"
 import locationsData from "../public/data/locations.json"
 import { Location } from "./types"
 
@@ -28,12 +25,6 @@ export default function Home() {
     setIsBookingOpen(true)
   }
 
-  // Funkcja otwierająca ogólny formularz rezerwacji
-  const handleOpenGeneralBooking = () => {
-    setSelectedLocationId(null)
-    setIsBookingOpen(true)
-  }
-
   // Pokazywanie szczegółów obiektu
   const handleShowDetails = (location: Location) => {
     setDetailsLocation(location)
@@ -49,44 +40,39 @@ export default function Home() {
     }
   }
 
+  // Otwiera formularz rezerwacji bez wybranego obiektu
+  const handleOpenGeneralBooking = () => {
+    setSelectedLocationId(null)
+    setIsBookingOpen(true)
+  }
+
   return (
-    <div className='flex flex-col min-h-screen'>
-      {/* Pasek nawigacji */}
-      <Navbar onBookNow={handleOpenGeneralBooking} />
+    <>
+      {/* Karuzela Hero */}
+      <Hero onBookNow={handleOpenGeneralBooking} />
 
-      <main className='grow pt-20'>
-        {/* Karuzela Hero */}
-        <Hero onBookNow={handleOpenGeneralBooking} />
+      {/* Trójwymiarowy stos wyróżnionych kart */}
+      <FeaturedSpots
+        locations={locationsData}
+        onSelectLocation={handleSelectLocation}
+      />
 
-        {/* Trójwymiarowy stos wyróżnionych kart */}
-        <FeaturedSpots
-          locations={locationsData}
-          onSelectLocation={handleSelectLocation}
-        />
+      {/* Katalog wszystkich kempingów */}
+      <Catalog
+        locations={locationsData}
+        selectedLocationId={selectedLocationId}
+        onBookLocation={handleBookLocation}
+        onShowDetails={handleShowDetails}
+      />
 
-        {/* Katalog wszystkich kempingów */}
-        <Catalog
-          locations={locationsData}
-          selectedLocationId={selectedLocationId}
-          onBookLocation={handleBookLocation}
-          onShowDetails={handleShowDetails}
-        />
+      {/* Interaktywna mapa topograficzna */}
+      <LocationMap
+        locations={locationsData}
+        onSelectLocation={handleSelectLocation}
+        activeLocationId={selectedLocationId}
+      />
 
-        {/* Interaktywna mapa topograficzna */}
-        <LocationMap
-          locations={locationsData}
-          onSelectLocation={handleSelectLocation}
-          activeLocationId={selectedLocationId}
-        />
-
-        {/* Sekcja SaaS z planami abonamentowymi */}
-        <SubscriptionPlans />
-      </main>
-
-      {/* Stopka */}
-      <Footer />
-
-      {/* Wieloetapowy modal rezerwacji */}
+      {/* Wieloetapowy modal rezerwacji (strona główna) */}
       <BookingModal
         key={
           isBookingOpen ? `open-${selectedLocationId || "general"}` : "closed"
@@ -107,6 +93,6 @@ export default function Home() {
         location={detailsLocation}
         onBook={handleBookLocation}
       />
-    </div>
+    </>
   )
 }
