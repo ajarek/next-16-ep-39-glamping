@@ -226,7 +226,7 @@ export default function LocationMap({
                         <div className='flex items-center justify-between mt-2 pt-2 border-t border-border-custom/50'>
                           <div>
                             <span className='text-sm font-black text-fg-custom'>
-                              ${loc.price}
+                              PLN {loc.price}
                             </span>
                             <span className='text-[9px] text-fg-custom/60'>
                               /noc

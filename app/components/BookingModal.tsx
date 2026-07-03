@@ -15,10 +15,10 @@ interface BookingModalProps {
 }
 
 const ADDONS = [
-  { id: "kayak", name: "Dwuosobowy kajak", price: 20, description: "Dostęp do kajaka na czas całego pobytu ($20/dzień)", perDay: true },
-  { id: "food", name: "Lokalne wyżywienie", price: 35, description: "Kosz delikatesowy z lokalnymi produktami dostarczany rano ($35/dzień/osobę)", perPerson: true, perDay: true },
-  { id: "sauna", name: "Dostęp do sauny leśnej", price: 50, description: "Jednorazowy nielimitowany seans w saunie opalanej drewnem ($50/pobyt)", perDay: false },
-  { id: "stargazing", name: "Zestaw do obserwacji gwiazd", price: 15, description: "Profesjonalna lornetka i teleskop astronomiczny z mapą nieba ($15/pobyt)", perDay: false },
+  { id: "kayak", name: "Dwuosobowy kajak", price: 75, description: "Dostęp do kajaka na czas całego pobytu (PLN 75/dzień)", perDay: true },
+  { id: "food", name: "Lokalne wyżywienie", price: 131, description: "Kosz delikatesowy z lokalnymi produktami dostarczany rano (PLN 131/dzień/osobę)", perPerson: true, perDay: true },
+  { id: "sauna", name: "Dostęp do sauny leśnej", price: 188, description: "Jednorazowy nielimitowany seans w saunie opalanej drewnem (PLN 188/pobyt)", perDay: false },
+  { id: "stargazing", name: "Zestaw do obserwacji gwiazd", price: 56, description: "Profesjonalna lornetka i teleskop astronomiczny z mapą nieba (PLN 56/pobyt)", perDay: false },
 ];
 
 export default function BookingModal({
@@ -322,7 +322,7 @@ export default function BookingModal({
                         >
                           {locations.map((loc) => (
                             <option key={loc.id} value={loc.id}>
-                              {loc.name} (${loc.price}/noc)
+                              {loc.name} (PLN {loc.price}/noc)
                             </option>
                           ))}
                         </select>
@@ -500,7 +500,7 @@ export default function BookingModal({
                                 </span>
                               </div>
                               <span className="text-sm font-black text-brand-primary">
-                                +${addon.price}
+                                +PLN {addon.price}
                               </span>
                             </button>
                           );
@@ -548,7 +548,7 @@ export default function BookingModal({
                               return (
                                 <div key={addonId} className="flex justify-between text-xs">
                                   <span className="text-fg-custom/80 font-medium">• {addon?.name}</span>
-                                  <span className="font-bold text-fg-custom/60">+${addon?.price}</span>
+                                  <span className="font-bold text-fg-custom/60">+PLN {addon?.price}</span>
                                 </div>
                               );
                             })}
@@ -560,11 +560,11 @@ export default function BookingModal({
                           <div>
                             <span className="text-xs text-fg-custom/60 block font-light">Łączny koszt:</span>
                             <span className="text-xs font-semibold text-fg-custom/40">
-                              (baza: ${basePrice} + dodatki: ${addonsPrice})
+                              (baza: PLN {basePrice} + dodatki: PLN {addonsPrice})
                             </span>
                           </div>
                           <span className="text-3xl font-black text-brand-accent">
-                            ${totalPrice}
+                            PLN {totalPrice}
                           </span>
                         </div>
                       </div>

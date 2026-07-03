@@ -96,7 +96,7 @@ export default function PromoCatalog({
                 {/* Dolny panel: cena i przyciski */}
                 <div className="border-t border-border-custom mt-6 pt-6 flex items-center justify-between">
                   <div>
-                    <span className="text-2xl font-black text-fg-custom">${loc.price}</span>
+                    <span className="text-2xl font-black text-fg-custom">PLN {loc.price}</span>
                     <span className="text-xs text-fg-custom/60"> / noc</span>
                   </div>
 

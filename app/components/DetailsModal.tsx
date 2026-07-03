@@ -87,7 +87,7 @@ export default function DetailsModal({
                 </div>
                 <div>
                   <span className='text-3xl font-black text-fg-custom'>
-                    ${location.price}
+                    PLN {location.price}
                   </span>
                   <span className='text-xs text-fg-custom/60'> / noc</span>
                 </div>
@@ -129,7 +129,7 @@ export default function DetailsModal({
                   SZACUNKOWY KOSZT
                 </span>
                 <span className='text-base font-extrabold text-fg-custom'>
-                  ${location.price} za nocleg
+                  PLN {location.price} za nocleg
                 </span>
               </div>
               <button

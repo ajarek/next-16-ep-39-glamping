@@ -644,7 +644,7 @@ function PaymentStep({
                 Przetwarzanie płatności…
               </span>
             ) : (
-              `ZAPŁAĆ $${isYearly ? selectedPlan.yearlyPrice * 12 : selectedPlan.monthlyPrice} ${isYearly ? "ROCZNIE" : "MIESIĘCZNIE"}`
+              `ZAPŁAĆ PLN ${isYearly ? selectedPlan.yearlyPrice * 12 : selectedPlan.monthlyPrice} ${isYearly ? "ROCZNIE" : "MIESIĘCZNIE"}`
             )}
           </button>
         </form>

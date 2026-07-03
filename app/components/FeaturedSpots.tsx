@@ -153,7 +153,7 @@ export default function FeaturedSpots({
                   <div className='flex items-center justify-between border-t border-border-custom pt-4'>
                     <div>
                       <span className='text-xl font-black text-fg-custom'>
-                        ${spot.price}
+                        PLN {spot.price}
                       </span>
                       <span className='text-xs text-fg-custom/60'>/noc</span>
                     </div>

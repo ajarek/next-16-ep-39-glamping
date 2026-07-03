@@ -50,7 +50,7 @@ export default function Navbar({ onBookNow }: NavbarProps) {
             <ThemeToggle />
             {/* Przycisk Dodaj Ofertę */}
             <Link
-              href="/dodaj-oferte"
+              href="/add-offer"
               className="px-5 py-2.5 rounded-full text-xs font-semibold tracking-widest border border-border-custom text-fg-custom hover:bg-brand-muted/10 transition-all duration-300 flex items-center gap-1.5"
             >
               <Plus className="w-3.5 h-3.5" />
