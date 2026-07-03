@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import FeaturedSpots from "./components/FeaturedSpots"
-import Catalog from "./components/Catalog"
+import PromoCatalog from "./components/PromoCatalog"
 import LocationMap from "./components/LocationMap"
 import BookingModal from "./components/BookingModal"
 import DetailsModal from "./components/DetailsModal"
@@ -57,8 +57,8 @@ export default function Home() {
         onSelectLocation={handleSelectLocation}
       />
 
-      {/* Katalog wszystkich kempingów */}
-      <Catalog
+      {/* Promocyjna wersja katalogu - tylko 3 pierwsze lokalizacje */}
+      <PromoCatalog
         locations={locationsData}
         selectedLocationId={selectedLocationId}
         onBookLocation={handleBookLocation}

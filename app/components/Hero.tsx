@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { ArrowRight, Compass } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import Link from "next/link"
 
 interface HeroProps {
   onBookNow: () => void
@@ -129,13 +130,13 @@ export default function Hero({ onBookNow }: HeroProps) {
               ZAREZERWUJ TERAZ
               <ArrowRight className='w-4 h-4 transition-transform group-hover:translate-x-1' />
             </button>
-            <a
-              href='#locations'
+            <Link
+              href='/locations'
               className='flex items-center gap-2 border border-white/30 hover:border-white hover:bg-white/10 text-white px-8 py-4 rounded-full font-bold text-xs tracking-widest transition-all duration-300'
             >
               <Compass className='w-4 h-4' />
               ODKRYJ LOKACJE
-            </a>
+            </Link>
           </motion.div>
         </div>
       </div>

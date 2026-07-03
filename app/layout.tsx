@@ -29,6 +29,7 @@ export default function RootLayout({
     <html
       lang='pl'
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className='min-h-full flex flex-col bg-bg-custom text-fg-custom transition-colors duration-300'>
         {/* ThemeProvider + ClientLayout zapewniają motyw i wspólny UI (Navbar, Footer) */}

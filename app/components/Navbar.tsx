@@ -16,7 +16,7 @@ export default function Navbar({ onBookNow }: NavbarProps) {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const menuItems = [
-    { label: "LOKALIZACJE", href: "/#locations", icon: Compass },
+    { label: "LOKALIZACJE", href: "/locations", icon: Compass },
     { label: "O NAS", href: "/#about", icon: Info },
     { label: "KONTAKT", href: "/#contact", icon: Mail },
   ];

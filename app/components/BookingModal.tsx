@@ -254,7 +254,7 @@ export default function BookingModal({
                         {s === 3 && "Dodatki"}
                         {s === 4 && "Podsumowanie"}
                       </span>
-                      {s < 4 && <div className="h-[1px] bg-border-custom flex-1 hidden sm:block" />}
+                      {s < 4 && <div className="h-px bg-border-custom flex-1 hidden sm:block" />}
                     </div>
                   ))}
                 </div>
