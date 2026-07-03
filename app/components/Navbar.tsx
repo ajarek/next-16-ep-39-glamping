@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, Compass, Info, DollarSign, Mail, Calendar, Plus } from "lucide-react";
+import { Menu, X, Compass, Info, Mail, Calendar, Plus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
 
@@ -18,7 +18,7 @@ export default function Navbar({ onBookNow }: NavbarProps) {
   const menuItems = [
     { label: "LOKALIZACJE", href: "/locations", icon: Compass },
     { label: "O NAS", href: "/#about", icon: Info },
-    { label: "KONTAKT", href: "/#contact", icon: Mail },
+    { label: "KONTAKT", href: "/contact", icon: Mail },
   ];
 
   return (
