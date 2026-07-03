@@ -75,7 +75,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href='#about'
+                  href='/about'
                   className='hover:text-brand-accent transition-colors'
                 >
                   O Portalu

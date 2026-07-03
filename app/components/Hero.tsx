@@ -55,9 +55,9 @@ export default function Hero({ onBookNow }: HeroProps) {
             style={{ backgroundImage: `url(${SLIDES[currentSlide].image})` }}
           />
         </AnimatePresence>
-        {/* Gradienty przyciemniające */}
-        <div className='absolute inset-0 bg-linear-to-t from-black via-black/30 to-black/40 z-10' />
-        <div className='absolute inset-0 bg-linear-to-r from-black/60 via-transparent to-transparent z-10' />
+        {/* Gradienty rozjaśniające tło */}
+        <div className='absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-black/10 z-10' />
+        <div className='absolute inset-0 bg-linear-to-r from-black/45 via-black/10 to-transparent z-10' />
       </div>
 
       {/* Treść sekcji Hero */}
@@ -87,7 +87,7 @@ export default function Hero({ onBookNow }: HeroProps) {
           </motion.div>
 
           {/* Dynamiczne Hasło */}
-          <div className='h-[180px] sm:h-[220px] md:h-[260px] overflow-hidden flex flex-col justify-end'>
+          <div className='h-45 sm:h-55 md:h-65 overflow-hidden flex flex-col justify-end'>
             <AnimatePresence mode='wait'>
               <motion.h1
                 key={currentSlide}

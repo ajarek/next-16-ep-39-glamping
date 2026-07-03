@@ -17,7 +17,7 @@ export default function Navbar({ onBookNow }: NavbarProps) {
 
   const menuItems = [
     { label: "LOKALIZACJE", href: "/locations", icon: Compass },
-    { label: "O NAS", href: "/#about", icon: Info },
+    { label: "O NAS", href: "/about", icon: Info },
     { label: "KONTAKT", href: "/contact", icon: Mail },
   ];
 
