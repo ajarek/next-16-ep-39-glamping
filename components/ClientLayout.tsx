@@ -4,7 +4,7 @@ import { useState } from "react"
 import Navbar from "./Navbar"
 import Footer from "./Footer"
 import BookingModal from "./BookingModal"
-import locationsData from "../../public/data/locations.json"
+import locationsData from "@/public/data/locations.json"
 
 // Kliencki wrapper layoutu — zarządza stanem modalu rezerwacji
 // i renderuje wspólne elementy UI dla wszystkich stron

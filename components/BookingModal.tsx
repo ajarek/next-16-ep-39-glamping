@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { X, Calendar, User, CheckCircle, ChevronRight, ChevronLeft, ArrowRight, Loader2, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { createBooking } from "../actions/booking";
-import { firebaseDb } from "../lib/firebase";
-import { Location } from "../types";
+import { createBooking } from "@/app/actions/booking";
+import { firebaseDb } from "@/app/lib/firebase";
+import { Location } from "@/app/types";
 
 interface BookingModalProps {
   isOpen: boolean;

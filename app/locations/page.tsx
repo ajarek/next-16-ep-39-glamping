@@ -1,11 +1,11 @@
 "use client"
 
 import { useState } from "react"
-import Catalog from "../components/Catalog"
-import BookingModal from "../components/BookingModal"
-import DetailsModal from "../components/DetailsModal"
-import locationsData from "../../public/data/locations.json"
-import { Location } from "../types"
+import Catalog from "@/components/Catalog"
+import BookingModal from "@/components/BookingModal"
+import DetailsModal from "@/components/DetailsModal"
+import locationsData from "@/public/data/locations.json"
+import { Location } from "@/app/types"
 
 export default function LocationsPage() {
   const [isBookingOpen, setIsBookingOpen] = useState(false)

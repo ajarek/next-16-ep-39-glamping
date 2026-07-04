@@ -1,6 +1,6 @@
 "use client"
 
-import { useTheme } from "../context/ThemeContext"
+import { useTheme } from "@/app/context/ThemeContext"
 import { Sun, Moon } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 

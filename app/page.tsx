@@ -1,12 +1,12 @@
 "use client"
 
 import { useState } from "react"
-import FeaturedSpots from "./components/FeaturedSpots"
-import PromoCatalog from "./components/PromoCatalog"
-import LocationMap from "./components/LocationMap"
-import BookingModal from "./components/BookingModal"
-import DetailsModal from "./components/DetailsModal"
-import Hero from "./components/Hero"
+import FeaturedSpots from "@/components/FeaturedSpots"
+import PromoCatalog from "@/components/PromoCatalog"
+import LocationMap from "@/components/LocationMap"
+import BookingModal from "@/components/BookingModal"
+import DetailsModal from "@/components/DetailsModal"
+import Hero from "@/components/Hero"
 import locationsData from "../public/data/locations.json"
 import { Location } from "./types"
 
