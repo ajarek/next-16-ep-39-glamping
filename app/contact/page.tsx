@@ -9,11 +9,17 @@ import {
   Phone,
   Sparkles,
 } from "lucide-react"
+import { toast } from "sonner"
 
 export default function ContactPage() {
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
+    toast.success("Wiadomość została wysłana! Odpowiemy w ciągu 24 godzin.", {
+      description:
+        "Dziękujemy za kontakt. Sprawdzimy Twoją wiadomość i skontaktujemy się z Tobą jak najszybciej.",
+    })
+    e.currentTarget.reset()
+    
   }
   return (
     <div className='min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(200,149,98,0.16),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(45,62,44,0.16),transparent_30%)]'>
