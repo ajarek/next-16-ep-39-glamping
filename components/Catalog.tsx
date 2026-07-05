@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import { Search, SlidersHorizontal, Star, ArrowUpDown, CalendarRange, MapPin } from "lucide-react";
 import Image from "next/image";
-import { Location } from "../types";
+import { Location } from "@/app/types";
 
 interface CatalogProps {
   locations: Location[];

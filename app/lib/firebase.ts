@@ -2,7 +2,7 @@ import { initializeApp, getApps, getApp, FirebaseApp } from "firebase/app"
 import { getAuth, Auth } from "firebase/auth"
 import { getFirestore, Firestore } from "firebase/firestore"
 import locationsData from "@/public/data/locations.json"
-import { Location } from "../types"
+import { Location } from "@/app/types"
 
 // Konfiguracja Firebase pobierana ze zmiennych środowiskowych
 const firebaseConfig = {
@@ -265,6 +265,102 @@ export async function addLocation(location: Omit<Location, "id"> & { id?: string
     }
   } catch (error) {
     console.error("Błąd podczas dodawania lokalizacji do Firebase:", error)
+    throw error
+  }
+}
+
+// Helper do aktualizacji lokalizacji
+export async function updateLocation(id: string, data: Partial<Location>): Promise<void> {
+  try {
+    if ("getDocs" in firebaseDb) {
+      // Mock Firestore
+      const docs = await firebaseDb.getDocs("locations")
+      const index = docs.findIndex((d) => d.id === id)
+      if (index !== -1) {
+        docs[index] = { ...docs[index], ...data }
+        if (typeof window !== "undefined") {
+          localStorage.setItem("mock_firestore_locations", JSON.stringify(docs))
+        }
+      }
+    } else {
+      // Prawdziwy Firestore
+      const { doc, updateDoc } = await import("firebase/firestore")
+      const docRef = doc(firebaseDb as Firestore, "locations", id)
+      await updateDoc(docRef, data)
+    }
+  } catch (error) {
+    console.error("Błąd podczas aktualizacji lokalizacji:", error)
+    throw error
+  }
+}
+
+// Helper do usuwania lokalizacji
+export async function deleteLocation(id: string): Promise<void> {
+  try {
+    if ("getDocs" in firebaseDb) {
+      // Mock Firestore
+      const docs = await firebaseDb.getDocs("locations")
+      const filtered = docs.filter((d) => d.id !== id)
+      if (typeof window !== "undefined") {
+        localStorage.setItem("mock_firestore_locations", JSON.stringify(filtered))
+      }
+    } else {
+      // Prawdziwy Firestore
+      const { doc, deleteDoc } = await import("firebase/firestore")
+      const docRef = doc(firebaseDb as Firestore, "locations", id)
+      await deleteDoc(docRef)
+    }
+  } catch (error) {
+    console.error("Błąd podczas usuwania lokalizacji:", error)
+    throw error
+  }
+}
+
+// Helper do sprawdzania roli admina w Firestore
+// Kolekcja "users" — wyszukuje po polu "uid" (nie po ID dokumentu)
+// W mocku: sprawdza localStorage
+export async function isAdminUser(uid: string): Promise<boolean> {
+  try {
+    if ("getDocs" in firebaseDb) {
+      // Mock Firestore — sprawdzamy localStorage
+      if (typeof window === "undefined") return false
+      const key = "mock_firestore_users"
+      const users = JSON.parse(localStorage.getItem(key) || "[]") as Record<string, unknown>[]
+      const userDoc = users.find((u) => u.uid === uid || u.id === uid)
+      return userDoc?.role === "admin"
+    } else {
+      // Prawdziwy Firestore — szukamy po polu uid za pomocą query
+      const { collection, query, where, getDocs } = await import("firebase/firestore")
+      const usersCol = collection(firebaseDb as Firestore, "users")
+      const q = query(usersCol, where("uid", "==", uid))
+      const querySnapshot = await getDocs(q)
+      if (!querySnapshot.empty) {
+        const firstDoc = querySnapshot.docs[0]
+        return firstDoc.data().role === "admin"
+      }
+      return false
+    }
+  } catch (error) {
+    console.error("Błąd podczas sprawdzania roli admina:", error)
+    return false
+  }
+}
+
+// Helper do ustawiania roli admina (używany do inicjalizacji)
+export async function setAdminRole(uid: string, email: string): Promise<void> {
+  const userData = { uid, email, role: "admin", id: uid }
+  try {
+    if ("getDocs" in firebaseDb) {
+      // Mock Firestore — zapisujemy z id = uid aby isAdminUser mogło go znaleźć
+      await firebaseDb.addDoc("users", userData)
+    } else {
+      // Prawdziwy Firestore
+      const { doc, setDoc } = await import("firebase/firestore")
+      const userRef = doc(firebaseDb as Firestore, "users", uid)
+      await setDoc(userRef, userData)
+    }
+  } catch (error) {
+    console.error("Błąd podczas ustawiania roli admina:", error)
     throw error
   }
 }

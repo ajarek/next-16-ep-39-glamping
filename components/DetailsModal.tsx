@@ -3,7 +3,7 @@
 import { X, Star, Check, CalendarRange } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
-import { Location } from "../types"
+import { Location } from "@/app/types"
 
 interface DetailsModalProps {
   isOpen: boolean

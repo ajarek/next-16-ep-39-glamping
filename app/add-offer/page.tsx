@@ -22,6 +22,7 @@ import {
   CheckCircle2,
   ArrowLeft,
 } from "lucide-react"
+import { addLocation, loginUser, registerUser } from "@/app/lib/firebase"
 
 // --- Typy ---
 interface Plan {
@@ -315,16 +316,41 @@ function LoginStep({
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [authError, setAuthError] = useState<string | null>(null)
   const [mode, setMode] = useState<"login" | "register">("login")
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
-    // Symulacja autoryzacji
-    setTimeout(() => {
-      setIsLoading(false)
+    setAuthError(null)
+
+    try {
+      if (mode === "login") {
+        await loginUser(email, password)
+      } else {
+        await registerUser(email, password)
+      }
       onNext()
-    }, 1200)
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "Nieznany błąd"
+      console.error("Błąd autoryzacji:", errorMessage)
+
+      if (errorMessage.includes("auth/user-not-found")) {
+        setAuthError("Nie znaleziono użytkownika o podanym adresie e-mail.")
+      } else if (errorMessage.includes("auth/wrong-password")) {
+        setAuthError("Nieprawidłowe hasło.")
+      } else if (errorMessage.includes("auth/email-already-in-use")) {
+        setAuthError("Konto o tym adresie e-mail już istnieje.")
+      } else if (errorMessage.includes("auth/weak-password")) {
+        setAuthError("Hasło jest zbyt słabe — minimum 6 znaków.")
+      } else if (errorMessage.includes("auth/invalid-email")) {
+        setAuthError("Nieprawidłowy format adresu e-mail.")
+      } else {
+        setAuthError("Wystąpił błąd logowania. Spróbuj ponownie.")
+      }
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -351,6 +377,11 @@ function LoginStep({
       </div>
 
       <div className='bg-card-custom border border-border-custom rounded-3xl p-8 shadow-xl'>
+        {authError && (
+          <div className='mb-6 p-4 rounded-2xl bg-red-500/10 border border-red-500/30 text-red-500 text-xs font-medium text-center'>
+            {authError}
+          </div>
+        )}
         {/* Przełącznik trybu */}
         <div className='flex rounded-2xl bg-bg-custom border border-border-custom p-1 mb-8'>
           {(["login", "register"] as const).map((m) => (
@@ -672,6 +703,7 @@ function OfferFormStep({
   onBack: () => void
 }) {
   const [isLoading, setIsLoading] = useState(false)
+  const [saveError, setSaveError] = useState<string | null>(null)
   const [formData, setFormData] = useState({
     name: "",
     locationName: "",
@@ -691,14 +723,39 @@ function OfferFormStep({
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
-    // Symulacja zapisu
-    setTimeout(() => {
-      setIsLoading(false)
+    setSaveError(null)
+
+    try {
+      const newLocation = {
+        name: formData.name,
+        locationName: formData.locationName,
+        description: formData.description,
+        price: Number(formData.price) || 0,
+        rating: Number(formData.rating) || 5,
+        image: "/images/forest-haven.png",
+        tags: formData.tags
+          .split(",")
+          .map((t) => t.trim())
+          .filter(Boolean),
+        coords: { x: 51.1 + Math.random() * 2, y: 17.0 + Math.random() * 2 },
+        details: formData.details,
+        features: formData.features
+          .split(",")
+          .map((f) => f.trim())
+          .filter(Boolean),
+      }
+
+      await addLocation(newLocation)
       onNext()
-    }, 1500)
+    } catch (err) {
+      console.error("Błąd zapisu oferty:", err)
+      setSaveError("Nie udało się zapisać oferty w bazie danych. Spróbuj ponownie.")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -726,6 +783,11 @@ function OfferFormStep({
       </div>
 
       <div className='bg-card-custom border border-border-custom rounded-3xl p-8 shadow-xl'>
+        {saveError && (
+          <div className='mb-6 p-4 rounded-2xl bg-red-500/10 border border-red-500/30 text-red-500 text-xs font-medium text-center'>
+            {saveError}
+          </div>
+        )}
         <form onSubmit={handleSubmit} className='space-y-6'>
           {/* Nazwa obiektu */}
           <div>

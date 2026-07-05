@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Star, MapPin, Compass } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
-import { Location } from "../types"
+import { Location } from "@/app/types"
 
 interface LocationMapProps {
   locations: Location[]

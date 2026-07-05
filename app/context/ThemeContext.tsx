@@ -7,20 +7,26 @@ type Theme = "dark" | "light"
 interface ThemeContextType {
   theme: Theme
   toggleTheme: () => void
+  mounted: boolean
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // Leniwa inicjalizacja stanu — odczyt z localStorage tylko raz, przed pierwszym renderem,
-  // bez zbędnych efektów ubocznych powodujących kaskadowe re-rendery
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window === "undefined") return "dark"
-    return (localStorage.getItem("theme") as Theme) ?? "dark"
-  })
+  // Inicjalizacja z "dark" zawsze — serwer i klient zaczynają tak samo
+  const [theme, setTheme] = useState<Theme>("dark")
+  const [mounted, setMounted] = useState(false)
+
+  // Po zamontowaniu odczytujemy faktyczny motyw z localStorage
+  useEffect(() => {
+    const saved = (localStorage.getItem("theme") as Theme) ?? "dark"
+    setTheme(saved)
+    setMounted(true)
+  }, [])
 
   // Synchronizujemy DOM i localStorage przy każdej zmianie motywu
   useEffect(() => {
+    if (!mounted) return
     const root = window.document.documentElement
     if (theme === "dark") {
       root.classList.add("dark")
@@ -30,16 +36,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       root.style.colorScheme = "light"
     }
     localStorage.setItem("theme", theme)
-  }, [theme])
+  }, [theme, mounted])
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"))
   }
 
-  // Zawsze owijamy dzieci w Provider — zapobiega błędowi "useTheme poza ThemeProvider"
-  // podczas pierwszego renderu (przed zamontowaniem) i po zamontowaniu
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, mounted }}>
       {children}
     </ThemeContext.Provider>
   )

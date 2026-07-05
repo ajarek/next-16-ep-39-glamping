@@ -5,7 +5,18 @@ import { Sun, Moon } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 
 export default function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme()
+  const { theme, toggleTheme, mounted } = useTheme()
+
+  // Nie renderuj ikony przed zamontowaniem — zapobiega hydration mismatch
+  if (!mounted) {
+    return (
+      <button
+        suppressHydrationWarning
+        className='relative flex items-center justify-center w-10 h-10 rounded-full border border-border-custom bg-card-custom'
+        aria-label='Przełącz motyw'
+      />
+    )
+  }
 
   return (
     <button
