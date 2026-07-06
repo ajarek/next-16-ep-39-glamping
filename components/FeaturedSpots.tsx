@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Star, ArrowRight } from "lucide-react"
 import { motion } from "framer-motion"
 import Image from "next/image"
@@ -8,24 +8,54 @@ import { Location } from "@/app/types"
 
 interface FeaturedSpotsProps {
   locations: Location[]
+  isLoading: boolean
   onSelectLocation: (id: string) => void
 }
 
 export default function FeaturedSpots({
   locations,
+  isLoading,
   onSelectLocation,
 }: FeaturedSpotsProps) {
   // Wybieramy 3 główne lokalizacje do karuzeli wachlarzowej
   const featuredIds = ["forest-haven", "lakeside-retreat", "meadow-vista"]
   const featured = locations.filter((loc) => featuredIds.includes(loc.id))
 
-  // Środkowa karta jest aktywna domyślnie (Lakeside Retreat)
-  const [activeId, setActiveId] = useState("lakeside-retreat")
+  // Środkowa (aktywna) karta — domyślnie "lakeside-retreat",
+  // ale jeśli jej brak w danych, ustawiamy pierwszy dostępny element
+  const [activeId, setActiveId] = useState("")
+
+  // Gdy dane się załadują, aktualizujemy activeId jeśli obecny nie pasuje
+  useEffect(() => {
+    if (featured.length === 0) return
+
+    const targetId = featured.some((l) => l.id === "lakeside-retreat")
+      ? "lakeside-retreat"
+      : featured[0].id
+
+    if (activeId !== targetId) {
+      setActiveId(targetId)
+    }
+  }, [featured, activeId])
 
   // Funkcja określająca pozycję i rotację karty w stosie 3D
   const getCardStyles = (id: string) => {
     const index = featured.findIndex((loc) => loc.id === id)
     const activeIndex = featured.findIndex((loc) => loc.id === activeId)
+
+    // Jeśli nie ma aktywnej karty (np. tylko 1 element), wszystkie są neutralne
+    if (activeIndex === -1) {
+      const total = featured.length
+      const offset = total === 1 ? 0 : (index - (total - 1) / 2) * 200
+      return {
+        zIndex: 5,
+        x: offset,
+        y: 0,
+        rotate: 0,
+        scale: total === 1 ? 1 : 0.9,
+        opacity: 1,
+      }
+    }
 
     if (id === activeId) {
       return {
@@ -59,8 +89,8 @@ export default function FeaturedSpots({
       className='py-24 px-6 bg-zinc-50/50 dark:bg-[#070906] transition-colors relative overflow-hidden'
     >
       {/* Ozdobne tła geometryczne */}
-      <div className='absolute top-1/2 left-1/4 -translate-y-1/2 w-[400px] h-[400px] bg-brand-primary/5 rounded-full blur-3xl pointer-events-none' />
-      <div className='absolute top-1/3 right-1/4 -translate-y-1/2 w-[350px] h-[350px] bg-brand-accent/5 rounded-full blur-3xl pointer-events-none' />
+      <div className='absolute top-1/2 left-1/4 -translate-y-1/2 w-100 h-100 bg-brand-primary/15 rounded-full blur-3xl pointer-events-none' />
+      <div className='absolute top-1/3 right-1/4 -translate-y-1/2 w-87 h-87 bg-brand-accent/20 rounded-full blur-3xl pointer-events-none' />
 
       <div className='max-w-7xl mx-auto text-center relative z-10'>
         {/* Nagłówek */}
@@ -73,23 +103,32 @@ export default function FeaturedSpots({
         </h2>
 
         {/* Wachlarzowy stos kart 3D (Struktura zrzutu ekranu nr 1) */}
-        <div className='relative flex justify-center items-center h-[580px] mt-16 max-w-4xl mx-auto'>
-          {featured.map((spot) => {
-            const styles = getCardStyles(spot.id)
-            const isActive = spot.id === activeId
+        <div className='relative flex justify-center items-center h-145 mt-16 max-w-4xl mx-auto'>
+          {featured.length === 0 ? (
+            <div className='w-full rounded-3xl border border-border-custom bg-card-custom/80 px-8 py-12 text-fg-custom shadow-xl'>
+              <p className='text-sm font-medium text-fg-custom/70'>
+                {isLoading
+                  ? "Ładowanie wyróżnionych lokalizacji..."
+                  : "Brak wyróżnionych lokalizacji do wyświetlenia."}
+              </p>
+            </div>
+          ) : (
+            featured.map((spot) => {
+              const styles = getCardStyles(spot.id)
+              const isActive = spot.id === activeId
 
-            return (
-              <motion.div
-                key={spot.id}
-                animate={styles}
-                transition={{ type: "spring", stiffness: 200, damping: 25 }}
-                onClick={() => {
-                  if (!isActive) setActiveId(spot.id)
-                }}
-                className={`absolute w-[290px] sm:w-[320px] bg-card-custom rounded-2xl border border-border-custom shadow-xl hover:shadow-2xl overflow-hidden cursor-pointer select-none`}
-              >
+              return (
+                <motion.div
+                  key={spot.id}
+                  animate={styles}
+                  transition={{ type: "spring", stiffness: 200, damping: 25 }}
+                  onClick={() => {
+                    if (!isActive) setActiveId(spot.id)
+                  }}
+                  className={`absolute w-72 sm:w-[320px] bg-card-custom rounded-2xl border border-border-custom shadow-xl hover:shadow-2xl overflow-hidden cursor-pointer select-none`}
+                >
                 {/* Zdjęcie kempingu */}
-                <div className='relative h-[220px] w-full'>
+                <div className='relative h-55 w-full'>
                   <Image
                     src={spot.image}
                     alt={spot.name}
@@ -106,7 +145,7 @@ export default function FeaturedSpots({
                 </div>
 
                 {/* Zawartość karty */}
-                <div className='p-6 text-left flex flex-col justify-between h-[260px]'>
+                <div className='p-6 text-left flex flex-col justify-between h-65'>
                   <div>
                     {/* Nazwa i lokalizacja */}
                     <h3 className='text-xl font-bold text-fg-custom leading-tight'>
@@ -172,7 +211,7 @@ export default function FeaturedSpots({
                 </div>
               </motion.div>
             )
-          })}
+          }))}
         </div>
       </div>
     </section>

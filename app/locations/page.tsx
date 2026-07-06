@@ -4,7 +4,7 @@ import { useState } from "react"
 import Catalog from "@/components/Catalog"
 import BookingModal from "@/components/BookingModal"
 import DetailsModal from "@/components/DetailsModal"
-import locationsData from "@/public/data/locations.json"
+import { useLocations } from "@/app/hooks/useLocations"
 import { Location } from "@/app/types"
 
 export default function LocationsPage() {
@@ -15,6 +15,7 @@ export default function LocationsPage() {
 
   const [isDetailsOpen, setIsDetailsOpen] = useState(false)
   const [detailsLocation, setDetailsLocation] = useState<Location | null>(null)
+  const { locations } = useLocations()
 
   // Funkcja otwierająca rezerwację dla konkretnego obiektu
   const handleBookLocation = (id: string) => {
@@ -32,7 +33,7 @@ export default function LocationsPage() {
     <>
       {/* Katalog wszystkich kempingów z filtrowaniem i sortowaniem */}
       <Catalog
-        locations={locationsData}
+        locations={locations}
         selectedLocationId={selectedLocationId}
         onBookLocation={handleBookLocation}
         onShowDetails={handleShowDetails}
@@ -45,7 +46,7 @@ export default function LocationsPage() {
         }
         isOpen={isBookingOpen}
         onClose={() => setIsBookingOpen(false)}
-        locations={locationsData}
+        locations={locations}
         preSelectedLocationId={selectedLocationId}
       />
 

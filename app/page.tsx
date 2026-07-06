@@ -7,7 +7,7 @@ import LocationMap from "@/components/LocationMap"
 import BookingModal from "@/components/BookingModal"
 import DetailsModal from "@/components/DetailsModal"
 import Hero from "@/components/Hero"
-import locationsData from "../public/data/locations.json"
+import { useLocations } from "@/app/hooks/useLocations"
 import { Location } from "./types"
 
 export default function Home() {
@@ -18,6 +18,7 @@ export default function Home() {
 
   const [isDetailsOpen, setIsDetailsOpen] = useState(false)
   const [detailsLocation, setDetailsLocation] = useState<Location | null>(null)
+  const { locations, isLoading } = useLocations()
 
   // Funkcja otwierająca rezerwację dla konkretnego obiektu
   const handleBookLocation = (id: string) => {
@@ -34,7 +35,7 @@ export default function Home() {
   // Wybieranie obiektu z mapy lub sekcji wyróżnionej
   const handleSelectLocation = (id: string) => {
     setSelectedLocationId(id)
-    const location = locationsData.find((l) => l.id === id)
+    const location = locations.find((l) => l.id === id)
     if (location) {
       handleShowDetails(location)
     }
@@ -53,13 +54,14 @@ export default function Home() {
 
       {/* Trójwymiarowy stos wyróżnionych kart */}
       <FeaturedSpots
-        locations={locationsData}
+        locations={locations}
+        isLoading={isLoading}
         onSelectLocation={handleSelectLocation}
       />
 
       {/* Promocyjna wersja katalogu - tylko 3 pierwsze lokalizacje */}
       <PromoCatalog
-        locations={locationsData}
+        locations={locations}
         selectedLocationId={selectedLocationId}
         onBookLocation={handleBookLocation}
         onShowDetails={handleShowDetails}
@@ -67,7 +69,7 @@ export default function Home() {
 
       {/* Interaktywna mapa topograficzna */}
       <LocationMap
-        locations={locationsData}
+        locations={locations}
         onSelectLocation={handleSelectLocation}
         activeLocationId={selectedLocationId}
       />
@@ -79,7 +81,7 @@ export default function Home() {
         }
         isOpen={isBookingOpen}
         onClose={() => setIsBookingOpen(false)}
-        locations={locationsData}
+        locations={locations}
         preSelectedLocationId={selectedLocationId}
       />
 

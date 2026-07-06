@@ -4,7 +4,7 @@ import { useState } from "react"
 import Navbar from "./Navbar"
 import Footer from "./Footer"
 import BookingModal from "./BookingModal"
-import locationsData from "@/public/data/locations.json"
+import { useLocations } from "@/app/hooks/useLocations"
 
 // Kliencki wrapper layoutu — zarządza stanem modalu rezerwacji
 // i renderuje wspólne elementy UI dla wszystkich stron
@@ -14,6 +14,7 @@ export default function ClientLayout({
   children: React.ReactNode
 }) {
   const [isBookingOpen, setIsBookingOpen] = useState(false)
+  const { locations } = useLocations()
 
   const handleOpenGeneralBooking = () => {
     setIsBookingOpen(true)
@@ -32,7 +33,7 @@ export default function ClientLayout({
         key={isBookingOpen ? "open-general" : "closed"}
         isOpen={isBookingOpen}
         onClose={() => setIsBookingOpen(false)}
-        locations={locationsData}
+        locations={locations}
         preSelectedLocationId={null}
       />
     </div>
