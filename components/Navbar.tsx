@@ -135,10 +135,10 @@ export default function Navbar({ onBookNow }: NavbarProps) {
                   <div className="relative" ref={userMenuRef}>
                     <button
                       onClick={() => setShowUserMenu(!showUserMenu)}
-                      className="flex items-center gap-2 p-2.5 rounded-full border border-border-custom bg-card-custom hover:bg-brand-muted/10 transition-all duration-200"
+                      className="flex items-center gap-2 p-2.5 rounded-full border border-slate-700/80 bg-card-custom text-slate-900 shadow-sm hover:bg-brand-primary/10 transition-all duration-200 dark:border-brand-primary/40 dark:text-brand-primary"
                       aria-label="Menu użytkownika"
                     >
-                      <User className="w-4 h-4 text-brand-accent" />
+                      <User className="w-4 h-4 text-slate-800 dark:text-white" />
                       <ChevronDown
                         className={`w-3 h-3 text-fg-custom/50 transition-transform duration-200 ${showUserMenu ? "rotate-180" : ""}`}
                       />
@@ -192,7 +192,7 @@ export default function Navbar({ onBookNow }: NavbarProps) {
                   /* Niezalogowany — przycisk logowania */
                   <button
                     onClick={() => setShowLoginModal(true)}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold tracking-widest border border-border-custom text-fg-custom hover:bg-brand-muted/10 transition-all duration-300"
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold tracking-widest border border-brand-primary/35 text-brand-primary hover:bg-brand-primary/10 transition-all duration-300"
                   >
                     <LogIn className="w-3.5 h-3.5" />
                     LOGUJ
@@ -210,7 +210,7 @@ export default function Navbar({ onBookNow }: NavbarProps) {
               <div className="relative" ref={userMenuRef}>
                 <button
                   onClick={() => setShowUserMenu(!showUserMenu)}
-                  className="p-2 rounded-full border border-border-custom bg-card-custom text-brand-accent"
+                  className="p-2 rounded-full border border-slate-700/80 bg-card-custom text-slate-900 shadow-sm dark:border-brand-primary/40 dark:text-brand-accent"
                   aria-label="Menu użytkownika"
                 >
                   <User className="w-4 h-4" />
@@ -292,7 +292,7 @@ export default function Navbar({ onBookNow }: NavbarProps) {
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 bottom-0 left-0 z-50 w-[280px] bg-card-custom border-r border-border-custom shadow-2xl p-6 flex flex-col justify-between md:hidden"
+              className="fixed top-0 bottom-0 left-0 z-50 w-70 bg-card-custom border-r border-border-custom shadow-2xl p-6 flex flex-col justify-between md:hidden"
             >
               <div>
                 <div className="flex items-center justify-between pb-6 border-b border-border-custom">
@@ -448,26 +448,26 @@ function LoginFormModal({ onClose }: { onClose: () => void }) {
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
         transition={{ type: "spring", stiffness: 300, damping: 25 }}
-        className="bg-card-custom border border-border-custom rounded-3xl p-8 max-w-sm w-full shadow-2xl"
+        className="bg-card-custom border border-slate-700/70 dark:border-brand-primary/25 rounded-3xl p-8 max-w-sm w-full shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="text-center mb-6">
-          <LogIn className="w-8 h-8 text-brand-accent mx-auto mb-3" />
+          <LogIn className="w-8 h-8 text-slate-800 dark:text-brand-primary mx-auto mb-3" />
           <h2 className="text-xl font-light text-fg-custom tracking-tight">
             {mode === "login" ? "Zaloguj się" : "Utwórz konto"}
           </h2>
         </div>
 
         {/* Przełącznik trybu */}
-        <div className="flex rounded-2xl bg-bg-custom border border-border-custom p-1 mb-5">
+        <div className="flex rounded-2xl bg-slate-100/80 dark:bg-brand-muted/40 border border-slate-300/80 dark:border-brand-primary/20 p-1 mb-5">
           {(["login", "register"] as const).map((m) => (
             <button
               key={m}
               onClick={() => setMode(m)}
               className={`flex-1 py-2 rounded-xl text-xs font-bold tracking-wider transition-all duration-300 ${
                 mode === m
-                  ? "bg-brand-primary text-brand-primary-fg shadow-sm"
-                  : "text-fg-custom/50 hover:text-fg-custom"
+                  ? "bg-slate-900 text-white dark:bg-brand-primary dark:text-brand-primary-fg shadow-sm"
+                  : "text-slate-600 hover:text-slate-900 dark:text-fg-custom/50 dark:hover:text-fg-custom"
               }`}
             >
               {m === "login" ? "LOGOWANIE" : "REJESTRACJA"}
@@ -492,7 +492,7 @@ function LoginFormModal({ onClose }: { onClose: () => void }) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="twoj@email.com"
-              className="w-full px-4 py-3 rounded-xl bg-bg-custom border border-border-custom text-sm text-fg-custom placeholder:text-fg-custom/30 focus:outline-none focus:border-brand-accent transition-colors"
+              className="w-full px-4 py-3 rounded-xl bg-white/90 dark:bg-bg-custom border border-slate-400/80 dark:border-border-custom text-sm text-slate-900 dark:text-fg-custom placeholder:text-slate-400 dark:placeholder:text-fg-custom/30 focus:outline-none focus:border-slate-700 dark:focus:border-brand-accent transition-colors"
             />
           </div>
           <div>
@@ -506,12 +506,12 @@ function LoginFormModal({ onClose }: { onClose: () => void }) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Minimum 6 znaków"
-                className="w-full px-4 py-3 pr-10 rounded-xl bg-bg-custom border border-border-custom text-sm text-fg-custom placeholder:text-fg-custom/30 focus:outline-none focus:border-brand-accent transition-colors"
+                className="w-full px-4 py-3 pr-10 rounded-xl bg-white/90 dark:bg-bg-custom border border-slate-400/80 dark:border-border-custom text-sm text-slate-900 dark:text-fg-custom placeholder:text-slate-400 dark:placeholder:text-fg-custom/30 focus:outline-none focus:border-slate-700 dark:focus:border-brand-accent transition-colors"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-fg-custom/40 hover:text-fg-custom transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-900 dark:text-fg-custom/40 dark:hover:text-fg-custom transition-colors"
               >
                 {showPassword ? (
                   <X className="w-4 h-4" />
@@ -542,7 +542,7 @@ function LoginFormModal({ onClose }: { onClose: () => void }) {
 
         <button
           onClick={onClose}
-          className="mt-4 w-full text-center text-xs text-fg-custom/40 hover:text-fg-custom transition-colors"
+          className="mt-4 w-full text-center text-xs text-slate-500 hover:text-slate-900 dark:text-fg-custom/40 dark:hover:text-fg-custom transition-colors"
         >
           Zamknij
         </button>

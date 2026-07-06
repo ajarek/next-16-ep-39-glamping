@@ -713,6 +713,7 @@ function OfferFormStep({
     tags: "",
     details: "",
     features: "",
+    image: "/images/forest-haven.png",
   })
 
   const handleChange = (
@@ -735,7 +736,7 @@ function OfferFormStep({
         description: formData.description,
         price: Number(formData.price) || 0,
         rating: Number(formData.rating) || 5,
-        image: "/images/forest-haven.png",
+        image: formData.image.trim() || "/images/forest-haven.png",
         tags: formData.tags
           .split(",")
           .map((t) => t.trim())
@@ -942,26 +943,26 @@ function OfferFormStep({
             />
           </div>
 
-          {/* Upload zdjęcia */}
+          {/* Ścieżka do obrazu */}
           <div>
             <label className='block text-xs font-semibold text-fg-custom/70 mb-2 tracking-wider'>
-              ZDJĘCIE GŁÓWNE
+              ŚCIEŻKA DO ZDJĘCIA GŁÓWNEGO
             </label>
-            <label
-              htmlFor='offer-image'
-              className='flex items-center gap-4 w-full px-4 py-5 rounded-2xl bg-bg-custom border-2 border-dashed border-border-custom hover:border-brand-accent text-fg-custom/50 hover:text-brand-accent transition-colors cursor-pointer'
-            >
-              <Upload className='w-5 h-5 shrink-0' />
-              <span className='text-sm font-light'>
-                Kliknij, aby wybrać zdjęcie (JPG, PNG, WebP — max 10MB)
-              </span>
+            <div className='relative'>
+              <Upload className='absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-fg-custom/40' />
               <input
-                type='file'
+                type='text'
+                name='image'
                 id='offer-image'
-                accept='image/*'
-                className='sr-only'
+                value={formData.image}
+                onChange={handleChange}
+                placeholder='/images/forest-haven.png'
+                className='w-full pl-11 pr-4 py-3.5 rounded-2xl bg-bg-custom border border-border-custom text-sm text-fg-custom placeholder:text-fg-custom/30 focus:outline-none focus:border-brand-accent transition-colors'
               />
-            </label>
+            </div>
+            <p className='mt-2 text-xs text-fg-custom/50'>
+              Podaj ścieżkę do obrazu, np. /images/forest-haven.png lub /public/images/nazwa.jpg.
+            </p>
           </div>
 
           <button

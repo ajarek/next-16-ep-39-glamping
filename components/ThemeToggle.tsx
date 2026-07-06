@@ -12,7 +12,7 @@ export default function ThemeToggle() {
     return (
       <button
         suppressHydrationWarning
-        className='relative flex items-center justify-center w-10 h-10 rounded-full border border-border-custom bg-card-custom'
+        className='relative flex items-center justify-center w-10 h-10 rounded-full border border-brand-primary/30 bg-card-custom text-brand-primary shadow-sm'
         aria-label='Przełącz motyw'
       />
     )
@@ -22,7 +22,7 @@ export default function ThemeToggle() {
     <button
       suppressHydrationWarning
       onClick={toggleTheme}
-      className='relative flex items-center justify-center w-10 h-10 rounded-full border border-border-custom bg-card-custom hover:bg-brand-muted/10 transition-all duration-300 focus:outline-none'
+      className='relative flex items-center justify-center w-10 h-10 rounded-full border border-brand-primary/30 bg-card-custom text-brand-primary shadow-sm hover:bg-brand-primary/10 transition-all duration-300 focus:outline-none'
       aria-label='Przełącz motyw'
     >
       <AnimatePresence mode='wait' initial={false}>
@@ -44,7 +44,7 @@ export default function ThemeToggle() {
             animate={{ rotate: 0, scale: 1 }}
             exit={{ rotate: 180, scale: 0 }}
             transition={{ duration: 0.3 }}
-            className='absolute text-brand-accent'
+            className='absolute text-brand-primary'
           >
             <Sun className='w-5 h-5' />
           </motion.div>

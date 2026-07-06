@@ -57,6 +57,7 @@ function LocationForm({
     tags: initial?.tags?.join(", ") || "",
     details: initial?.details || "",
     features: initial?.features?.join(", ") || "",
+    image: initial?.image || "/images/forest-haven.png",
   })
 
   const handleChange = (
@@ -75,7 +76,7 @@ function LocationForm({
       description: formData.description,
       price: Number(formData.price) || 0,
       rating: Number(formData.rating) || 5,
-      image: initial?.image || "/images/forest-haven.png",
+      image: formData.image.trim() || initial?.image || "/images/forest-haven.png",
       tags: formData.tags
         .split(",")
         .map((t) => t.trim())
@@ -210,6 +211,21 @@ function LocationForm({
         />
       </div>
 
+      {/* Ścieżka obrazu */}
+      <div>
+        <label className="block text-xs font-semibold text-fg-custom/70 mb-1.5 tracking-wider">
+          ŚCIEŻKA DO ZDJĘCIA
+        </label>
+        <input
+          type="text"
+          name="image"
+          value={formData.image}
+          onChange={handleChange}
+          placeholder="/images/forest-haven.png"
+          className="w-full px-4 py-2.5 rounded-xl bg-bg-custom border border-border-custom text-sm text-fg-custom placeholder:text-fg-custom/30 focus:outline-none focus:border-brand-accent transition-colors"
+        />
+      </div>
+
       {/* Szczegóły */}
       <div>
         <label className="block text-xs font-semibold text-fg-custom/70 mb-1.5 tracking-wider">
@@ -291,6 +307,17 @@ function LocationCard({
     >
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1 min-w-0">
+          {location.image ? (
+            <img
+              src={location.image}
+              alt={location.name}
+              className="h-28 w-full rounded-xl object-cover mb-3 border border-border-custom"
+            />
+          ) : (
+            <div className="mb-3 flex h-28 items-center justify-center rounded-xl border border-dashed border-border-custom bg-bg-custom/70 text-[10px] uppercase tracking-wider text-fg-custom/40">
+              Brak obrazu
+            </div>
+          )}
           <h3 className="text-sm font-bold text-fg-custom truncate">
             {location.name}
           </h3>
@@ -612,7 +639,7 @@ export default function AdminPage() {
 
   useEffect(() => {
     if (user) {
-      loadLocations()
+      void Promise.resolve().then(() => loadLocations())
     }
   }, [user, loadLocations])
 
@@ -721,8 +748,8 @@ export default function AdminPage() {
     return (
       <div className="min-h-screen bg-bg-custom">
         <div className="fixed inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-brand-accent/3 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-brand-primary/5 rounded-full blur-3xl" />
+          <div className="absolute top-0 left-0 w-125 h-125 bg-brand-accent/3 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-0 w-100 h-100 bg-brand-primary/5 rounded-full blur-3xl" />
         </div>
         <div className="relative z-10 flex items-center justify-center min-h-screen px-6 py-12">
           <AdminLoginForm />
@@ -735,8 +762,8 @@ export default function AdminPage() {
     <div className="min-h-screen bg-bg-custom">
       {/* Dekoracyjne tło */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-brand-accent/3 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-brand-primary/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-0 w-125 h-125 bg-brand-accent/3 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-100 h-100 bg-brand-primary/5 rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 py-12">
