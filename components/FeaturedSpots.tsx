@@ -1,52 +1,44 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useMemo, useState } from "react"
 import { Star, ArrowRight } from "lucide-react"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { Location } from "@/app/types"
+import locationsData from "@/public/data/locations.json"
 
 interface FeaturedSpotsProps {
-  locations: Location[]
-  isLoading: boolean
   onSelectLocation: (id: string) => void
 }
 
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array]
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  }
+  return shuffled
+}
+
 export default function FeaturedSpots({
-  locations,
-  isLoading,
   onSelectLocation,
 }: FeaturedSpotsProps) {
-  // Wybieramy 3 główne lokalizacje do karuzeli wachlarzowej
-  const featuredIds = ["forest-haven", "lakeside-retreat", "meadow-vista"]
-  const featured = locations.filter((loc) => featuredIds.includes(loc.id))
+  // Losowo wybieramy 3 lokalizacje do karuzeli wachlarzowej
+  const featured = useMemo(
+    () => shuffleArray(locationsData as Location[]).slice(0, 3),
+    [],
+  )
 
-  // Środkowa (aktywna) karta — domyślnie "lakeside-retreat",
-  // ale jeśli jej brak w danych, ustawiamy pierwszy dostępny element
-  const [activeId, setActiveId] = useState("")
-
-  // Gdy dane się załadują, aktualizujemy activeId jeśli obecny nie pasuje
-  useEffect(() => {
-    if (featured.length === 0) return
-
-    const targetId = featured.some((l) => l.id === "lakeside-retreat")
-      ? "lakeside-retreat"
-      : featured[0].id
-
-    // Nie ustawiamy stanu synchronicznie w efekcie — wykonujemy to asynchronicznie,
-    // aby uniknąć ostrzeżenia o kaskadowych renderach.
-    if (activeId !== targetId) {
-      const t = setTimeout(() => setActiveId(targetId), 0)
-      return () => clearTimeout(t)
-    }
-  }, [featured, activeId])
+  // Środkowa karta jest aktywna domyślnie
+  const [activeId, setActiveId] = useState(
+    () => featured[1]?.id ?? featured[0]?.id ?? "",
+  )
 
   // Funkcja określająca pozycję i rotację karty w stosie 3D
   const getCardStyles = (id: string) => {
     const index = featured.findIndex((loc) => loc.id === id)
     const activeIndex = featured.findIndex((loc) => loc.id === activeId)
 
-    // Jeśli nie ma aktywnej karty (np. tylko 1 element), wszystkie są neutralne
     if (activeIndex === -1) {
       const total = featured.length
       const offset = total === 1 ? 0 : (index - (total - 1) / 2) * 200
@@ -71,7 +63,6 @@ export default function FeaturedSpots({
       }
     }
 
-    // Karta po lewej od aktywnej lub pierwsza karta jeśli aktywna jest ostatnia
     const isLeft =
       index < activeIndex ||
       (activeIndex === 0 && index === featured.length - 1)
@@ -105,34 +96,24 @@ export default function FeaturedSpots({
           ekologicznym luksusem.
         </h2>
 
-        {/* Wachlarzowy stos kart 3D (Struktura zrzutu ekranu nr 1) */}
+        {/* Wachlarzowy stos kart 3D */}
         <div className='relative flex justify-center items-center h-145 mt-16 max-w-4xl mx-auto'>
-          {featured.length === 0 ? (
-            <div className='w-full rounded-3xl border border-border-custom bg-card-custom/80 px-8 py-12 text-fg-custom shadow-xl'>
-              <p className='text-sm font-medium text-fg-custom/70'>
-                {isLoading
-                  ? "Ładowanie wyróżnionych lokalizacji..."
-                  : "Brak wyróżnionych lokalizacji do wyświetlenia."}
-              </p>
-            </div>
-          ) : (
-            featured.map((spot) => {
-              const styles = getCardStyles(spot.id)
-              const isActive = spot.id === activeId
-              // Rozdzielamy zIndex (style) od animowanych transformów
-              const { zIndex, ...anim } = styles 
+          {featured.map((spot) => {
+            const styles = getCardStyles(spot.id)
+            const isActive = spot.id === activeId
+            const { zIndex, ...anim } = styles
 
-              return (
-                <motion.div
-                  key={spot.id}
-                  animate={anim}
-                  style={{ zIndex }}
-                  transition={{ type: "spring", stiffness: 200, damping: 25 }}
-                  onClick={() => {
-                    if (!isActive) setActiveId(spot.id)
-                  }}
-                  className={`absolute w-72 sm:w-[320px] bg-card-custom rounded-2xl border border-border-custom shadow-xl hover:shadow-2xl overflow-hidden cursor-pointer select-none`}
-                >
+            return (
+              <motion.div
+                key={spot.id}
+                animate={anim}
+                style={{ zIndex }}
+                transition={{ type: "spring", stiffness: 200, damping: 25 }}
+                onClick={() => {
+                  if (!isActive) setActiveId(spot.id)
+                }}
+                className='absolute w-72 sm:w-[320px] bg-card-custom rounded-2xl border border-border-custom shadow-xl hover:shadow-2xl overflow-hidden cursor-pointer select-none'
+              >
                 {/* Zdjęcie kempingu */}
                 <div className='relative h-55 w-full'>
                   <Image
@@ -143,7 +124,7 @@ export default function FeaturedSpots({
                     className='object-cover transition-transform duration-500 hover:scale-105'
                     priority
                   />
-                  {/* Ocena kempingu (np. gwiazdka 5.0) */}
+                  {/* Ocena kempingu */}
                   <div className='absolute top-4 right-4 flex items-center gap-1 bg-white/90 dark:bg-[#0c0e0a]/90 backdrop-blur-md px-2.5 py-1 rounded-full border border-border-custom text-xs font-bold text-fg-custom'>
                     <Star className='w-3.5 h-3.5 fill-brand-accent stroke-brand-accent' />
                     <span>{spot.rating}</span>
@@ -205,7 +186,7 @@ export default function FeaturedSpots({
 
                     <button
                       onClick={(e) => {
-                        e.stopPropagation() // Stop propagation to avoid activating parent div
+                        e.stopPropagation()
                         onSelectLocation(spot.id)
                       }}
                       className='flex items-center gap-1.5 text-xs font-bold text-brand-accent hover:text-brand-primary tracking-widest transition-colors group'
@@ -217,7 +198,7 @@ export default function FeaturedSpots({
                 </div>
               </motion.div>
             )
-          }))}
+          })}
         </div>
       </div>
     </section>

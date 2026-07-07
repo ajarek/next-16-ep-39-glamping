@@ -52,10 +52,8 @@ export default function Home() {
       {/* Karuzela Hero */}
       <Hero onBookNow={handleOpenGeneralBooking} />
 
-      {/* Trójwymiarowy stos wyróżnionych kart */}
+      {/* Trójwymiarowy stos wyróżnionych kart (dane z locations.json, losowy wybór) */}
       <FeaturedSpots
-        locations={locations}
-        isLoading={isLoading}
         onSelectLocation={handleSelectLocation}
       />
 

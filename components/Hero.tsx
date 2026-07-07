@@ -17,13 +17,13 @@ const SLIDES = [
       "Ręcznie wybrane miejsca, gdzie piękno natury łączy się ze zrównoważonym komfortem.",
   },
   {
-    image: "/images/lakeside-retreat.png",
+    image: "https://hipcamp-res.cloudinary.com/images/f_auto,c_limit,w_3840,q_auto/v1684370012/campground-photos/ghyync4wbuzrpyezbdzu/luxury-glamping-at-nalu-retreat-nalu-retreat-nordic-spa.jpg",
     title: "Obudź się\nnad brzegiem jeziora",
     subtitle:
       "Doświadcz luksusu pośród szczytów górskich i krystalicznie czystej wody.",
   },
   {
-    image: "/images/meadow-vista.png",
+    image: "https://raynham.co.uk/wp-content/uploads/2025/05/yurt-hottub.jpeg",
     title: "Zasypiaj pod\ngwiaździstym niebem",
     subtitle:
       "Odkryj kopuły geodezyjne z panoramicznym widokiem na drogę mleczną.",
@@ -56,8 +56,8 @@ export default function Hero({ onBookNow }: HeroProps) {
           />
         </AnimatePresence>
         {/* Gradienty rozjaśniające tło */}
-        <div className='absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-black/10 z-10' />
-        <div className='absolute inset-0 bg-linear-to-r from-black/45 via-black/10 to-transparent z-10' />
+        <div className='absolute inset-0 bg-linear-to-t from-black/60 via-black/320 to-black/5 z-10' />
+        <div className='absolute inset-0 bg-linear-to-r from-black/35 via-black/10 to-transparent z-10' />
       </div>
 
       {/* Treść sekcji Hero */}
