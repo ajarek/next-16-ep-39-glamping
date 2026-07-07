@@ -20,21 +20,26 @@ import {
   Mail,
   Eye,
   EyeOff,
+  Calendar,
+  User,
 } from "lucide-react"
 import Link from "next/link"
 import {
   getLocations,
+  getBookings,
   addLocation,
   updateLocation,
   deleteLocation,
+  deleteBooking,
   subscribeToAuth,
   loginUser,
   registerUser,
   logoutUser,
   isAdminUser,
 } from "@/app/lib/firebase"
-import type { Location } from "@/app/types"
+import type { Location, Booking } from "@/app/types"
 import type { MockUser } from "@/app/lib/firebase"
+import Image from "next/image"
 
 // --- Formularz edycji/dodawania ---
 function LocationForm({
@@ -308,10 +313,12 @@ function LocationCard({
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1 min-w-0">
           {location.image ? (
-            <img
+            <Image
               src={location.image}
               alt={location.name}
               className="h-28 w-full rounded-xl object-cover mb-3 border border-border-custom"
+              width={300}
+              height={112}
             />
           ) : (
             <div className="mb-3 flex h-28 items-center justify-center rounded-xl border border-dashed border-border-custom bg-bg-custom/70 text-[10px] uppercase tracking-wider text-fg-custom/40">
@@ -406,6 +413,147 @@ function DeleteConfirmModal({
               {location.name}
             </span>
             ? Tej operacji nie można cofnąć.
+          </p>
+        </div>
+        <div className="flex gap-3 mt-8">
+          <button
+            onClick={onConfirm}
+            disabled={isLoading}
+            className="flex-1 py-3 rounded-full text-xs font-bold tracking-widest bg-red-500 text-white hover:bg-red-600 transition-all duration-300 shadow-md disabled:opacity-60 flex items-center justify-center gap-2"
+          >
+            {isLoading ? (
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                className="w-4 h-4 border-2 border-current border-t-transparent rounded-full"
+              />
+            ) : (
+              <Trash2 className="w-4 h-4" />
+            )}
+            USUŃ
+          </button>
+          <button
+            onClick={onCancel}
+            className="flex-1 py-3 rounded-full text-xs font-bold tracking-widest border border-border-custom text-fg-custom hover:bg-brand-muted/10 transition-all duration-300"
+          >
+            ANULUJ
+          </button>
+        </div>
+      </motion.div>
+    </motion.div>
+  )
+}
+
+function BookingCard({
+  booking,
+  onDelete,
+}: {
+  booking: Booking
+  onDelete: (booking: Booking) => void
+}) {
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -12, scale: 0.95 }}
+      transition={{ duration: 0.3 }}
+      className="bg-card-custom border border-border-custom rounded-2xl p-5 hover:shadow-lg transition-all duration-300"
+    >
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex-1 min-w-0">
+          <div className="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-fg-custom/50 mb-3">
+            <span className="px-3 py-1 rounded-full bg-bg-custom border border-border-custom">
+              {booking.bookingCode}
+            </span>
+            <span className="px-3 py-1 rounded-full bg-bg-custom border border-border-custom">
+              {booking.locationName}
+            </span>
+          </div>
+
+          <h3 className="text-sm font-bold text-fg-custom truncate">
+            {booking.fullName}
+          </h3>
+          <p className="text-xs text-fg-custom/60 mt-1 truncate">{booking.email}</p>
+
+          <div className="grid grid-cols-2 gap-3 mt-4 text-xs text-fg-custom/60">
+            <div className="flex items-center gap-2">
+              <Calendar className="w-3.5 h-3.5 text-brand-accent shrink-0" />
+              <span>{booking.startDate} → {booking.endDate}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <User className="w-3.5 h-3.5 text-brand-accent shrink-0" />
+              <span>{booking.guestsCount} gości</span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 flex-wrap text-xs text-fg-custom/50 mt-4">
+            <span className="px-2 py-1 rounded-full bg-bg-custom border border-border-custom">
+              {booking.phone}
+            </span>
+            <span className="px-2 py-1 rounded-full bg-bg-custom border border-border-custom">
+              {booking.addons.length} dodatków
+            </span>
+          </div>
+        </div>
+
+        <div className="flex flex-col items-end gap-3 shrink-0">
+          <span className="text-sm font-bold text-brand-accent">
+            {booking.totalPrice} PLN
+          </span>
+          <button
+            onClick={() => onDelete(booking)}
+            className="p-2 rounded-xl text-fg-custom/40 hover:text-red-500 hover:bg-red-500/10 transition-all duration-200"
+            title="Usuń rezerwację"
+          >
+            <Trash2 className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
+function BookingDeleteConfirmModal({
+  booking,
+  onConfirm,
+  onCancel,
+  isLoading,
+}: {
+  booking: Booking
+  onConfirm: () => void
+  onCancel: () => void
+  isLoading: boolean
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+      onClick={onCancel}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        transition={{ type: "spring", stiffness: 300, damping: 25 }}
+        className="bg-card-custom border border-border-custom rounded-3xl p-8 max-w-md w-full shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="text-center">
+          <div className="w-16 h-16 rounded-full bg-red-500/10 border-2 border-red-500/30 flex items-center justify-center mx-auto mb-5">
+            <AlertTriangle className="w-8 h-8 text-red-500" />
+          </div>
+          <h3 className="text-lg font-bold text-fg-custom">
+            Usuń rezerwację?
+          </h3>
+          <p className="text-sm text-fg-custom/60 mt-2">
+            Czy na pewno chcesz usunąć rezerwację od
+            <span className="font-semibold text-fg-custom">
+              {" "}{booking.fullName}
+            </span>
+            za {booking.locationName}?
           </p>
         </div>
         <div className="flex gap-3 mt-8">
@@ -603,6 +751,9 @@ export default function AdminPage() {
   const [deletingLocation, setDeletingLocation] = useState<Location | null>(
     null,
   )
+  const [bookings, setBookings] = useState<Booking[]>([])
+  const [bookingsLoading, setBookingsLoading] = useState(true)
+  const [deletingBooking, setDeletingBooking] = useState<Booking | null>(null)
   const [isSaving, setIsSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [showForm, setShowForm] = useState(false)
@@ -637,11 +788,32 @@ export default function AdminPage() {
     }
   }, [])
 
-  useEffect(() => {
-    if (user) {
-      void Promise.resolve().then(() => loadLocations())
+  const loadBookings = useCallback(async () => {
+    setBookingsLoading(true)
+    setError(null)
+    try {
+      const data = await getBookings()
+      setBookings(data)
+    } catch (err) {
+      console.error("Błąd ładowania rezerwacji:", err)
+      setError("Nie udało się załadować rezerwacji.")
+    } finally {
+      setBookingsLoading(false)
     }
-  }, [user, loadLocations])
+  }, [])
+
+  useEffect(() => {
+    if (!user) {
+      return
+    }
+
+    const fetchAdminData = async () => {
+      await loadLocations()
+      await loadBookings()
+    }
+
+    void fetchAdminData()
+  }, [user, loadLocations, loadBookings])
 
   // Wylogowanie
   const handleLogout = async () => {
@@ -692,6 +864,21 @@ export default function AdminPage() {
     } catch (err) {
       console.error("Błąd usuwania:", err)
       setError("Nie udało się usunąć oferty.")
+    } finally {
+      setIsSaving(false)
+    }
+  }
+
+  const handleDeleteBooking = async () => {
+    if (!deletingBooking) return
+    setIsSaving(true)
+    try {
+      await deleteBooking(deletingBooking.id)
+      setDeletingBooking(null)
+      await loadBookings()
+    } catch (err) {
+      console.error("Błąd usuwania rezerwacji:", err)
+      setError("Nie udało się usunąć rezerwacji.")
     } finally {
       setIsSaving(false)
     }
@@ -781,7 +968,7 @@ export default function AdminPage() {
               Panel admina
             </h1>
             <p className="text-sm text-fg-custom/50 mt-1 font-light">
-              {user?.email} · Zarządzaj ofertami glampingowymi w Firestore
+              {user?.email} · Zarządzaj ofertami i rezerwacjami w Firestore
             </p>
           </div>
           <div className="flex gap-2">
@@ -894,6 +1081,60 @@ export default function AdminPage() {
             Łącznie {locations.length} ofert w Firestore
           </div>
         )}
+
+        {/* Zarządzanie rezerwacjami */}
+        <div className="mt-14">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-6">
+            <div>
+              <h2 className="text-2xl font-semibold text-fg-custom">
+                Rezerwacje
+              </h2>
+              <p className="mt-2 text-sm text-fg-custom/60 max-w-2xl">
+                Lista rezerwacji pobieranych z kolekcji bookings.
+              </p>
+            </div>
+            <button
+              onClick={loadBookings}
+              disabled={bookingsLoading}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-accent text-brand-accent-fg text-xs font-bold tracking-widest hover:bg-brand-primary hover:text-brand-primary-fg transition-all duration-300 shadow-md"
+            >
+              <RefreshCw className={`w-4 h-4 ${bookingsLoading ? "animate-spin" : ""}`} />
+              Odśwież rezerwacje
+            </button>
+          </div>
+
+          {bookingsLoading ? (
+            <div className="flex items-center justify-center py-16">
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                className="w-8 h-8 border-2 border-brand-accent border-t-transparent rounded-full"
+              />
+            </div>
+          ) : bookings.length === 0 ? (
+            <div className="rounded-3xl border border-border-custom bg-card-custom p-8 text-center text-sm text-fg-custom/60">
+              Brak rezerwacji w kolekcji bookings.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <AnimatePresence>
+                {bookings.map((booking) => (
+                  <BookingCard
+                    key={booking.id}
+                    booking={booking}
+                    onDelete={setDeletingBooking}
+                  />
+                ))}
+              </AnimatePresence>
+            </div>
+          )}
+
+          {bookings.length > 0 && (
+            <div className="mt-6 text-center text-xs text-fg-custom/30 tracking-wider">
+              Łącznie {bookings.length} rezerwacji w Firestore
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Modal edycji */}
@@ -943,6 +1184,17 @@ export default function AdminPage() {
             location={deletingLocation}
             onConfirm={handleDelete}
             onCancel={() => setDeletingLocation(null)}
+            isLoading={isSaving}
+          />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {deletingBooking && (
+          <BookingDeleteConfirmModal
+            booking={deletingBooking}
+            onConfirm={handleDeleteBooking}
+            onCancel={() => setDeletingBooking(null)}
             isLoading={isSaving}
           />
         )}

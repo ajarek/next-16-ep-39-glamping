@@ -255,10 +255,11 @@ function PricingStep({
                   {plan.description}
                 </p>
 
-                <div className='mt-6 pb-6 border-b border-border-custom flex items-baseline'>
+                <div className='mt-6 pb-6 border-b border-border-custom flex items-baseline gap-2'>
                   <span className='text-4xl font-black text-fg-custom tracking-tight'>
-                    ${price}
+                   {price}
                   </span>
+                  <span className='text-xs text-fg-custom/60 ml-1 font-medium'>PLN</span>
                   <span className='text-xs text-fg-custom/60 ml-2 font-medium'>
                     / miesiąc
                   </span>
@@ -574,8 +575,9 @@ function PaymentStep({
         </div>
         <div className='text-right'>
           <span className='text-3xl font-black text-brand-accent'>
-            ${price}
+            {price}
           </span>
+          <span className='text-xs text-fg-custom/60 ml-1 font-medium'>PLN</span>
           <span className='text-xs text-fg-custom/50 ml-1'>/ mies.</span>
         </div>
       </div>

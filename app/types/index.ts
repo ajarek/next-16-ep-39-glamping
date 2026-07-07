@@ -11,3 +11,19 @@ export interface Location {
   details: string
   features: string[]
 }
+
+export interface Booking {
+  id: string
+  bookingCode: string
+  locationId: string
+  locationName: string
+  startDate: string
+  endDate: string
+  guestsCount: number
+  fullName: string
+  email: string
+  phone: string
+  addons: string[]
+  totalPrice: number
+  createdAt?: string
+}

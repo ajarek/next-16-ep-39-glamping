@@ -140,20 +140,19 @@ export default function BookingModal({
       const result = await createBooking(bookingData);
 
       if (result.success && result.bookingId) {
+        const bookingRecord = {
+          bookingCode: result.bookingId,
+          ...bookingData,
+          locationName: selectedLocation?.name || "",
+          createdAt: new Date().toISOString(),
+        };
+
         // Zapis do Firebase (lub Mock)
         if ("addDoc" in firebaseDb) {
-          await firebaseDb.addDoc("bookings", {
-            bookingCode: result.bookingId,
-            ...bookingData,
-            locationName: selectedLocation?.name || "",
-          });
+          await firebaseDb.addDoc("bookings", bookingRecord);
         } else {
           const { collection, addDoc } = await import("firebase/firestore");
-          await addDoc(collection(firebaseDb, "bookings"), {
-            bookingCode: result.bookingId,
-            ...bookingData,
-            locationName: selectedLocation?.name || "",
-          });
+          await addDoc(collection(firebaseDb, "bookings"), bookingRecord);
         }
 
         setBookingCode(result.bookingId);

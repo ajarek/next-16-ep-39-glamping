@@ -2,7 +2,7 @@ import { initializeApp, getApps, getApp, FirebaseApp } from "firebase/app"
 import { getAuth, Auth } from "firebase/auth"
 import { getFirestore, Firestore } from "firebase/firestore"
 import locationsData from "@/public/data/locations.json"
-import { Location } from "@/app/types"
+import { Location, Booking } from "@/app/types"
 
 // Konfiguracja Firebase pobierana ze zmiennych środowiskowych
 const firebaseConfig = {
@@ -290,6 +290,56 @@ export async function updateLocation(id: string, data: Partial<Location>): Promi
     }
   } catch (error) {
     console.error("Błąd podczas aktualizacji lokalizacji:", error)
+    throw error
+  }
+}
+
+// Helper do pobierania rezerwacji
+export async function getBookings(): Promise<Booking[]> {
+  try {
+    if ("getDocs" in firebaseDb) {
+      const docs = await firebaseDb.getDocs("bookings")
+      return (docs as Booking[]).sort((a, b) => {
+        const aDate = a.createdAt ? Date.parse(a.createdAt) : 0
+        const bDate = b.createdAt ? Date.parse(b.createdAt) : 0
+        return bDate - aDate
+      })
+    } else {
+      const { collection, getDocs } = await import("firebase/firestore")
+      const bookingsCol = collection(firebaseDb as Firestore, "bookings")
+      const querySnapshot = await getDocs(bookingsCol)
+      const bookings: Booking[] = []
+      querySnapshot.forEach((doc) => {
+        bookings.push({ id: doc.id, ...(doc.data() as Booking) })
+      })
+      return bookings.sort((a, b) => {
+        const aDate = a.createdAt ? Date.parse(a.createdAt) : 0
+        const bDate = b.createdAt ? Date.parse(b.createdAt) : 0
+        return bDate - aDate
+      })
+    }
+  } catch (error) {
+    console.error("Błąd podczas pobierania rezerwacji z Firebase:", error)
+    return []
+  }
+}
+
+// Helper do usuwania rezerwacji
+export async function deleteBooking(id: string): Promise<void> {
+  try {
+    if ("getDocs" in firebaseDb) {
+      const docs = await firebaseDb.getDocs("bookings")
+      const filtered = docs.filter((d) => d.id !== id)
+      if (typeof window !== "undefined") {
+        localStorage.setItem("mock_firestore_bookings", JSON.stringify(filtered))
+      }
+    } else {
+      const { doc, deleteDoc } = await import("firebase/firestore")
+      const docRef = doc(firebaseDb as Firestore, "bookings", id)
+      await deleteDoc(docRef)
+    }
+  } catch (error) {
+    console.error("Błąd podczas usuwania rezerwacji:", error)
     throw error
   }
 }
