@@ -33,8 +33,11 @@ export default function FeaturedSpots({
       ? "lakeside-retreat"
       : featured[0].id
 
+    // Nie ustawiamy stanu synchronicznie w efekcie — wykonujemy to asynchronicznie,
+    // aby uniknąć ostrzeżenia o kaskadowych renderach.
     if (activeId !== targetId) {
-      setActiveId(targetId)
+      const t = setTimeout(() => setActiveId(targetId), 0)
+      return () => clearTimeout(t)
     }
   }, [featured, activeId])
 
@@ -116,11 +119,14 @@ export default function FeaturedSpots({
             featured.map((spot) => {
               const styles = getCardStyles(spot.id)
               const isActive = spot.id === activeId
+              // Rozdzielamy zIndex (style) od animowanych transformów
+              const { zIndex, ...anim } = styles 
 
               return (
                 <motion.div
                   key={spot.id}
-                  animate={styles}
+                  animate={anim}
+                  style={{ zIndex }}
                   transition={{ type: "spring", stiffness: 200, damping: 25 }}
                   onClick={() => {
                     if (!isActive) setActiveId(spot.id)
@@ -133,7 +139,7 @@ export default function FeaturedSpots({
                     src={spot.image}
                     alt={spot.name}
                     fill
-                    sizes='(max-w-700px) 100vw, 320px'
+                    sizes='(max-width: 700px) 100vw, 320px'
                     className='object-cover transition-transform duration-500 hover:scale-105'
                     priority
                   />
