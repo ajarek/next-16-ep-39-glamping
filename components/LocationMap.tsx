@@ -166,7 +166,7 @@ export default function LocationMap({
                   }}
                   onMouseEnter={() => setHoveredId(loc.id)}
                   onMouseLeave={() => setHoveredId(null)}
-                  className='relative flex items-center justify-center p-2 focus:outline-none transition-transform duration-300 transform group-hover:scale-110'
+                  className='relative flex items-center justify-center p-2 focus:outline-none transition-transform duration-300 transform group-hover:scale-110 cursor-pointer'
                   aria-label={`Pokaż ${loc.name}`}
                 >
                   {/* Efekt tętniącego pulsu wokół pinezki */}

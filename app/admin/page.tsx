@@ -266,7 +266,7 @@ function LocationForm({
         <button
           type="submit"
           disabled={isLoading}
-          className="flex-1 py-3 rounded-full text-xs font-bold tracking-widest bg-brand-accent text-brand-accent-fg hover:bg-brand-primary hover:text-brand-primary-fg transition-all duration-300 shadow-md disabled:opacity-60 flex items-center justify-center gap-2"
+          className="flex-1 py-3 rounded-full text-xs font-bold tracking-widest bg-brand-accent text-brand-accent-fg hover:bg-brand-primary hover:text-brand-primary-fg transition-all duration-300 shadow-md disabled:opacity-60 flex items-center justify-center gap-2 cursor-pointer"
         >
           {isLoading ? (
             <motion.div
@@ -282,7 +282,7 @@ function LocationForm({
         <button
           type="button"
           onClick={onCancel}
-          className="px-6 py-3 rounded-full text-xs font-bold tracking-widest border border-border-custom text-fg-custom hover:bg-brand-muted/10 transition-all duration-300"
+          className="px-6 py-3 rounded-full text-xs font-bold tracking-widest border border-border-custom text-fg-custom hover:bg-brand-muted/10 transition-all duration-300 cursor-pointer"
         >
           ANULUJ
         </button>
@@ -354,14 +354,14 @@ function LocationCard({
         <div className="flex gap-1.5 shrink-0">
           <button
             onClick={() => onEdit(location)}
-            className="p-2 rounded-xl text-fg-custom/40 hover:text-brand-accent hover:bg-brand-accent/10 transition-all duration-200"
+            className="p-2 rounded-xl text-fg-custom/40 hover:text-brand-accent hover:bg-brand-accent/10 transition-all duration-200 cursor-pointer"
             title="Edytuj"
           >
             <Pencil className="w-4 h-4" />
           </button>
           <button
             onClick={() => onDelete(location)}
-            className="p-2 rounded-xl text-fg-custom/40 hover:text-red-500 hover:bg-red-500/10 transition-all duration-200"
+            className="p-2 rounded-xl text-fg-custom/40 hover:text-red-500 hover:bg-red-500/10 transition-all duration-200 cursor-pointer"
             title="Usuń"
           >
             <Trash2 className="w-4 h-4" />
@@ -419,7 +419,7 @@ function DeleteConfirmModal({
           <button
             onClick={onConfirm}
             disabled={isLoading}
-            className="flex-1 py-3 rounded-full text-xs font-bold tracking-widest bg-red-500 text-white hover:bg-red-600 transition-all duration-300 shadow-md disabled:opacity-60 flex items-center justify-center gap-2"
+            className="flex-1 py-3 rounded-full text-xs font-bold tracking-widest bg-red-500 text-white hover:bg-red-600 transition-all duration-300 shadow-md disabled:opacity-60 flex items-center justify-center gap-2 cursor-pointer"
           >
             {isLoading ? (
               <motion.div
@@ -434,7 +434,7 @@ function DeleteConfirmModal({
           </button>
           <button
             onClick={onCancel}
-            className="flex-1 py-3 rounded-full text-xs font-bold tracking-widest border border-border-custom text-fg-custom hover:bg-brand-muted/10 transition-all duration-300"
+            className="flex-1 py-3 rounded-full text-xs font-bold tracking-widest border border-border-custom text-fg-custom hover:bg-brand-muted/10 transition-all duration-300 cursor-pointer"
           >
             ANULUJ
           </button>
@@ -503,7 +503,7 @@ function BookingCard({
           </span>
           <button
             onClick={() => onDelete(booking)}
-            className="p-2 rounded-xl text-fg-custom/40 hover:text-red-500 hover:bg-red-500/10 transition-all duration-200"
+            className="p-2 rounded-xl text-fg-custom/40 hover:text-red-500 hover:bg-red-500/10 transition-all duration-200 cursor-pointer"
             title="Usuń rezerwację"
           >
             <Trash2 className="w-4 h-4" />
@@ -560,7 +560,7 @@ function BookingDeleteConfirmModal({
           <button
             onClick={onConfirm}
             disabled={isLoading}
-            className="flex-1 py-3 rounded-full text-xs font-bold tracking-widest bg-red-500 text-white hover:bg-red-600 transition-all duration-300 shadow-md disabled:opacity-60 flex items-center justify-center gap-2"
+            className="flex-1 py-3 rounded-full text-xs font-bold tracking-widest bg-red-500 text-white hover:bg-red-600 transition-all duration-300 shadow-md disabled:opacity-60 flex items-center justify-center gap-2 cursor-pointer"
           >
             {isLoading ? (
               <motion.div
@@ -575,7 +575,7 @@ function BookingDeleteConfirmModal({
           </button>
           <button
             onClick={onCancel}
-            className="flex-1 py-3 rounded-full text-xs font-bold tracking-widest border border-border-custom text-fg-custom hover:bg-brand-muted/10 transition-all duration-300"
+            className="flex-1 py-3 rounded-full text-xs font-bold tracking-widest border border-border-custom text-fg-custom hover:bg-brand-muted/10 transition-all duration-300 cursor-pointer"
           >
             ANULUJ
           </button>
@@ -649,7 +649,7 @@ function AdminLoginForm() {
             <button
               key={m}
               onClick={() => setMode(m)}
-              className={`flex-1 py-2 rounded-xl text-xs font-bold tracking-wider transition-all duration-300 ${
+              className={`flex-1 py-2 rounded-xl text-xs font-bold tracking-wider transition-all duration-300 cursor-pointer ${
                 mode === m
                   ? "bg-brand-primary text-brand-primary-fg shadow-sm"
                   : "text-fg-custom/50 hover:text-fg-custom"
@@ -701,7 +701,7 @@ function AdminLoginForm() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-fg-custom/40 hover:text-fg-custom transition-colors"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-fg-custom/40 hover:text-fg-custom transition-colors cursor-pointer"
                 aria-label={showPassword ? "Ukryj hasło" : "Pokaż hasło"}
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -712,7 +712,7 @@ function AdminLoginForm() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-3.5 rounded-full text-xs font-bold tracking-widest bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-brand-accent-fg transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-60 flex items-center justify-center gap-2 mt-2"
+            className="w-full py-3.5 rounded-full text-xs font-bold tracking-widest bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-brand-accent-fg transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-60 flex items-center justify-center gap-2 mt-2 cursor-pointer"
           >
             {isLoading ? (
               <motion.div
@@ -975,7 +975,7 @@ export default function AdminPage() {
             <button
               onClick={loadLocations}
               disabled={isLoading}
-              className="p-2.5 rounded-xl text-fg-custom/40 hover:text-fg-custom hover:bg-brand-muted/10 transition-all duration-200"
+              className="p-2.5 rounded-xl text-fg-custom/40 hover:text-fg-custom hover:bg-brand-muted/10 transition-all duration-200 cursor-pointer"
               title="Odśwież"
             >
               <RefreshCw
@@ -984,14 +984,14 @@ export default function AdminPage() {
             </button>
             <button
               onClick={() => setShowForm(true)}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-accent text-brand-accent-fg text-xs font-bold tracking-widest hover:bg-brand-primary hover:text-brand-primary-fg transition-all duration-300 shadow-md"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-accent text-brand-accent-fg text-xs font-bold tracking-widest hover:bg-brand-primary hover:text-brand-primary-fg transition-all duration-300 shadow-md cursor-pointer"
             >
               <Plus className="w-4 h-4" />
               DODAJ
             </button>
             <button
               onClick={handleLogout}
-              className="p-2.5 rounded-xl text-fg-custom/40 hover:text-red-500 hover:bg-red-500/10 transition-all duration-200"
+              className="p-2.5 rounded-xl text-fg-custom/40 hover:text-red-500 hover:bg-red-500/10 transition-all duration-200 cursor-pointer"
               title="Wyloguj"
             >
               <X className="w-4 h-4" />
@@ -1023,7 +1023,7 @@ export default function AdminPage() {
                   </h2>
                   <button
                     onClick={() => setShowForm(false)}
-                    className="p-1.5 rounded-lg text-fg-custom/40 hover:text-fg-custom transition-colors"
+                    className="p-1.5 rounded-lg text-fg-custom/40 hover:text-fg-custom transition-colors cursor-pointer"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -1055,7 +1055,7 @@ export default function AdminPage() {
             </p>
             <button
               onClick={() => setShowForm(true)}
-              className="mt-4 text-xs text-brand-accent font-semibold hover:underline"
+              className="mt-4 text-xs text-brand-accent font-semibold hover:underline cursor-pointer"
             >
               Dodaj pierwszą ofertę →
             </button>
@@ -1096,7 +1096,7 @@ export default function AdminPage() {
             <button
               onClick={loadBookings}
               disabled={bookingsLoading}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-accent text-brand-accent-fg text-xs font-bold tracking-widest hover:bg-brand-primary hover:text-brand-primary-fg transition-all duration-300 shadow-md"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-accent text-brand-accent-fg text-xs font-bold tracking-widest hover:bg-brand-primary hover:text-brand-primary-fg transition-all duration-300 shadow-md cursor-pointer"
             >
               <RefreshCw className={`w-4 h-4 ${bookingsLoading ? "animate-spin" : ""}`} />
               Odśwież rezerwacje
@@ -1161,7 +1161,7 @@ export default function AdminPage() {
                 </h2>
                 <button
                   onClick={() => setEditingLocation(null)}
-                  className="p-1.5 rounded-lg text-fg-custom/40 hover:text-fg-custom transition-colors"
+                  className="p-1.5 rounded-lg text-fg-custom/40 hover:text-fg-custom transition-colors cursor-pointer"
                 >
                   <X className="w-4 h-4" />
                 </button>

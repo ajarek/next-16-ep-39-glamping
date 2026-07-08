@@ -125,7 +125,7 @@ export default function Hero({ onBookNow }: HeroProps) {
           >
             <button
               onClick={onBookNow}
-              className='flex items-center gap-3 bg-white hover:bg-brand-accent hover:text-white text-black px-8 py-4 rounded-full font-bold text-xs tracking-widest shadow-2xl transition-all duration-300 transform hover:scale-105 active:scale-95'
+              className='flex items-center gap-3 bg-white hover:bg-brand-accent hover:text-white text-black px-8 py-4 rounded-full font-bold text-xs tracking-widest shadow-2xl transition-all duration-300 transform hover:scale-105 active:scale-95 cursor-pointer'
             >
               ZAREZERWUJ TERAZ
               <ArrowRight className='w-4 h-4 transition-transform group-hover:translate-x-1' />
@@ -148,7 +148,7 @@ export default function Hero({ onBookNow }: HeroProps) {
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className='h-1 flex-1 relative rounded-full overflow-hidden focus:outline-none'
+              className='h-1 flex-1 relative rounded-full overflow-hidden focus:outline-none cursor-pointer'
             >
               {/* Tło paska */}
               <div className='absolute inset-0 bg-white/20' />

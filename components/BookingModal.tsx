@@ -226,7 +226,7 @@ export default function BookingModal({
               </div>
               <button
                 onClick={handleReset}
-                className="p-1.5 rounded-full border border-border-custom hover:bg-brand-muted/10 text-fg-custom"
+                className="p-1.5 rounded-full border border-border-custom hover:bg-brand-muted/10 text-fg-custom cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -295,7 +295,7 @@ export default function BookingModal({
 
                   <button
                     onClick={handleReset}
-                    className="mt-10 bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-brand-accent-fg px-8 py-3.5 rounded-full font-bold text-xs tracking-widest shadow-lg transition-all duration-300"
+                    className="mt-10 bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-brand-accent-fg px-8 py-3.5 rounded-full font-bold text-xs tracking-widest shadow-lg transition-all duration-300 cursor-pointer"
                   >
                     ZAMKNIJ OKNO
                   </button>
@@ -378,7 +378,7 @@ export default function BookingModal({
                           <button
                             type="button"
                             onClick={() => setGuestsCount((g) => Math.max(1, g - 1))}
-                            className="w-10 h-10 border border-border-custom rounded-lg bg-card-custom flex items-center justify-center font-bold text-fg-custom hover:bg-brand-muted/10 focus:outline-none"
+                            className="w-10 h-10 border border-border-custom rounded-lg bg-card-custom flex items-center justify-center font-bold text-fg-custom hover:bg-brand-muted/10 focus:outline-none cursor-pointer"
                           >
                             -
                           </button>
@@ -388,7 +388,7 @@ export default function BookingModal({
                           <button
                             type="button"
                             onClick={() => setGuestsCount((g) => Math.min(10, g + 1))}
-                            className="w-10 h-10 border border-border-custom rounded-lg bg-card-custom flex items-center justify-center font-bold text-fg-custom hover:bg-brand-muted/10 focus:outline-none"
+                            className="w-10 h-10 border border-border-custom rounded-lg bg-card-custom flex items-center justify-center font-bold text-fg-custom hover:bg-brand-muted/10 focus:outline-none cursor-pointer"
                           >
                             +
                           </button>
@@ -484,7 +484,7 @@ export default function BookingModal({
                               key={addon.id}
                               type="button"
                               onClick={() => handleAddonToggle(addon.id)}
-                              className={`w-full text-left p-4 rounded-xl border flex items-center justify-between transition-all ${
+                              className={`w-full text-left p-4 rounded-xl border flex items-center justify-between transition-all cursor-pointer ${
                                 isSelected
                                   ? "border-brand-accent bg-brand-accent/5 ring-1 ring-brand-accent/30"
                                   : "border-border-custom bg-card-custom hover:bg-brand-muted/5"
@@ -586,7 +586,7 @@ export default function BookingModal({
                     type="button"
                     onClick={handlePrev}
                     disabled={loading}
-                    className="flex items-center gap-1.5 px-4 py-2.5 rounded-full border border-border-custom hover:bg-brand-muted/10 text-xs font-bold tracking-widest text-fg-custom transition-all"
+                    className="flex items-center gap-1.5 px-4 py-2.5 rounded-full border border-border-custom hover:bg-brand-muted/10 text-xs font-bold tracking-widest text-fg-custom transition-all cursor-pointer"
                   >
                     <ChevronLeft className="w-4 h-4" />
                     WSTECZ
@@ -599,7 +599,7 @@ export default function BookingModal({
                   <button
                     type="button"
                     onClick={handleNext}
-                    className="flex items-center gap-1.5 bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-brand-accent-fg px-6 py-2.5 rounded-full text-xs font-bold tracking-widest transition-all duration-300 ml-auto"
+                    className="flex items-center gap-1.5 bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-brand-accent-fg px-6 py-2.5 rounded-full text-xs font-bold tracking-widest transition-all duration-300 ml-auto cursor-pointer"
                   >
                     DALEJ
                     <ChevronRight className="w-4 h-4" />
@@ -609,7 +609,7 @@ export default function BookingModal({
                     type="button"
                     onClick={handleSubmit}
                     disabled={loading}
-                    className="flex items-center gap-2 bg-brand-accent text-brand-accent-fg hover:bg-brand-primary hover:text-brand-primary-fg px-8 py-3 rounded-full text-xs font-bold tracking-widest transition-all duration-300 ml-auto shadow-lg disabled:opacity-50"
+                    className="flex items-center gap-2 bg-brand-accent text-brand-accent-fg hover:bg-brand-primary hover:text-brand-primary-fg px-8 py-3 rounded-full text-xs font-bold tracking-widest transition-all duration-300 ml-auto shadow-lg disabled:opacity-50 cursor-pointer"
                   >
                     {loading ? (
                       <>

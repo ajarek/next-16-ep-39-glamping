@@ -12,7 +12,7 @@ export default function ThemeToggle() {
     return (
       <button
         suppressHydrationWarning
-        className='relative flex items-center justify-center w-10 h-10 rounded-full border border-brand-primary/30 bg-card-custom text-brand-primary shadow-sm'
+        className='relative flex items-center justify-center w-10 h-10 rounded-full border border-brand-primary/30 bg-card-custom text-brand-primary shadow-sm cursor-pointer'
         aria-label='Przełącz motyw'
       />
     )
@@ -22,7 +22,7 @@ export default function ThemeToggle() {
     <button
       suppressHydrationWarning
       onClick={toggleTheme}
-      className='relative flex items-center justify-center w-10 h-10 rounded-full border border-brand-primary/30 bg-card-custom text-brand-primary shadow-sm hover:bg-brand-primary/10 transition-all duration-300 focus:outline-none'
+      className='relative flex items-center justify-center w-10 h-10 rounded-full border border-brand-primary/30 bg-card-custom text-brand-primary shadow-sm hover:bg-brand-primary/10 transition-all duration-300 focus:outline-none cursor-pointer'
       aria-label='Przełącz motyw'
     >
       <AnimatePresence mode='wait' initial={false}>

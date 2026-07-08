@@ -299,7 +299,8 @@ export async function getBookings(): Promise<Booking[]> {
   try {
     if ("getDocs" in firebaseDb) {
       const docs = await firebaseDb.getDocs("bookings")
-      return (docs as Booking[]).sort((a, b) => {
+      const bookings = docs as unknown as Booking[]
+      return bookings.sort((a, b) => {
         const aDate = a.createdAt ? Date.parse(a.createdAt) : 0
         const bDate = b.createdAt ? Date.parse(b.createdAt) : 0
         return bDate - aDate
@@ -310,7 +311,22 @@ export async function getBookings(): Promise<Booking[]> {
       const querySnapshot = await getDocs(bookingsCol)
       const bookings: Booking[] = []
       querySnapshot.forEach((doc) => {
-        bookings.push({ id: doc.id, ...(doc.data() as Booking) })
+        const bookingData = doc.data() as Partial<Booking>
+        bookings.push({
+          id: doc.id,
+          bookingCode: bookingData.bookingCode ?? "",
+          locationId: bookingData.locationId ?? "",
+          locationName: bookingData.locationName ?? "",
+          startDate: bookingData.startDate ?? "",
+          endDate: bookingData.endDate ?? "",
+          guestsCount: bookingData.guestsCount ?? 0,
+          fullName: bookingData.fullName ?? "",
+          email: bookingData.email ?? "",
+          phone: bookingData.phone ?? "",
+          addons: bookingData.addons ?? [],
+          totalPrice: bookingData.totalPrice ?? 0,
+          createdAt: bookingData.createdAt,
+        })
       })
       return bookings.sort((a, b) => {
         const aDate = a.createdAt ? Date.parse(a.createdAt) : 0

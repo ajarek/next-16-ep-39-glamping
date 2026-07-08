@@ -11,21 +11,18 @@ interface FeaturedSpotsProps {
   onSelectLocation: (id: string) => void
 }
 
-function shuffleArray<T>(array: T[]): T[] {
-  const shuffled = [...array]
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
-  }
-  return shuffled
+function getFeaturedSpots(locations: Location[]): Location[] {
+  return [...locations]
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 3)
 }
 
 export default function FeaturedSpots({
   onSelectLocation,
 }: FeaturedSpotsProps) {
-  // Losowo wybieramy 3 lokalizacje do karuzeli wachlarzowej
+  // Wybieramy 3 lokalizacje w stabilnej kolejności, aby uniknąć różnic między SSR a klientem
   const featured = useMemo(
-    () => shuffleArray(locationsData as Location[]).slice(0, 3),
+    () => getFeaturedSpots(locationsData as Location[]),
     [],
   )
 
@@ -189,7 +186,7 @@ export default function FeaturedSpots({
                         e.stopPropagation()
                         onSelectLocation(spot.id)
                       }}
-                      className='flex items-center gap-1.5 text-xs font-bold text-brand-accent hover:text-brand-primary tracking-widest transition-colors group'
+                      className='flex items-center gap-1.5 text-xs font-bold text-brand-accent hover:text-brand-primary tracking-widest transition-colors group cursor-pointer'
                     >
                       SZCZEGÓŁY
                       <ArrowRight className='w-3.5 h-3.5 transition-transform group-hover:translate-x-1' />

@@ -90,7 +90,7 @@ export default function SubscriptionPlans() {
             </span>
             <button
               onClick={() => setIsYearly(!isYearly)}
-              className='relative w-12 h-6 rounded-full bg-brand-primary p-1 focus:outline-none transition-colors duration-300'
+              className='relative w-12 h-6 rounded-full bg-brand-primary p-1 focus:outline-none transition-colors duration-300 cursor-pointer'
               aria-label='Przełącz okres rozliczeniowy'
             >
               <motion.div
@@ -169,7 +169,7 @@ export default function SubscriptionPlans() {
 
                 {/* Przycisk CTA */}
                 <button
-                  className={`mt-10 w-full py-3.5 rounded-full text-xs font-bold tracking-widest transition-all duration-300 ${
+                  className={`mt-10 w-full py-3.5 rounded-full text-xs font-bold tracking-widest transition-all duration-300 cursor-pointer ${
                     plan.isPopular
                       ? "bg-brand-accent text-brand-accent-fg hover:bg-brand-primary hover:text-brand-primary-fg shadow-md hover:shadow-lg"
                       : "border border-border-custom text-fg-custom hover:bg-brand-muted/10"

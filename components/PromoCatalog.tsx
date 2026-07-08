@@ -103,13 +103,13 @@ export default function PromoCatalog({
                   <div className="flex gap-2">
                     <button
                       onClick={() => onShowDetails(loc)}
-                      className="px-3.5 py-2 rounded-full border border-border-custom text-xs font-semibold text-fg-custom hover:bg-brand-muted/10 transition-colors"
+                      className="px-3.5 py-2 rounded-full border border-border-custom text-xs font-semibold text-fg-custom hover:bg-brand-muted/10 transition-colors cursor-pointer"
                     >
                       Odkryj
                     </button>
                     <button
                       onClick={() => onBookLocation(loc.id)}
-                      className="flex items-center gap-1 bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-brand-accent-fg px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300"
+                      className="flex items-center gap-1 bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-brand-accent-fg px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 cursor-pointer"
                     >
                       <CalendarRange className="w-3.5 h-3.5" />
                       Rezerwuj

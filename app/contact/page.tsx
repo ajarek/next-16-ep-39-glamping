@@ -214,7 +214,7 @@ export default function ContactPage() {
 
               <button
                 type='submit'
-                className='inline-flex items-center gap-2 rounded-full bg-brand-primary px-5 py-3 text-sm font-semibold text-brand-primary-fg transition hover:bg-brand-accent hover:text-brand-accent-fg'
+                className='inline-flex items-center gap-2 rounded-full bg-brand-primary px-5 py-3 text-sm font-semibold text-brand-primary-fg transition hover:bg-brand-accent hover:text-brand-accent-fg cursor-pointer'
               >
                 Wyślij wiadomość
                 <ArrowRight className='h-4 w-4' />

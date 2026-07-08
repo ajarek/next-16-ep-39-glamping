@@ -43,7 +43,7 @@ export default function DetailsModal({
             {/* Przycisk zamknięcia */}
             <button
               onClick={onClose}
-              className='absolute right-6 top-6 z-20 p-2 rounded-full bg-black/40 hover:bg-black/60 text-white backdrop-blur-md border border-white/10 transition-colors'
+              className='absolute right-6 top-6 z-20 p-2 rounded-full bg-black/40 hover:bg-black/60 text-white backdrop-blur-md border border-white/10 transition-colors cursor-pointer'
               aria-label='Zamknij podgląd'
             >
               <X className='w-4 h-4' />
@@ -137,7 +137,7 @@ export default function DetailsModal({
                   onClose()
                   onBook(location.id)
                 }}
-                className='flex items-center gap-2 bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-brand-accent-fg px-8 py-3.5 rounded-full font-bold text-xs tracking-widest transition-all duration-300 shadow-md'
+                className='flex items-center gap-2 bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-brand-accent-fg px-8 py-3.5 rounded-full font-bold text-xs tracking-widest transition-all duration-300 shadow-md cursor-pointer'
               >
                 <CalendarRange className='w-4 h-4' />
                 REZERWUJ POBYT

@@ -137,7 +137,7 @@ export default function Footer() {
                 placeholder='Twój adres e-mail'
                 className='w-full px-4 py-3 rounded-full bg-white/5 border border-white/10 text-xs focus:outline-none focus:border-brand-accent pr-12 text-white'
               />
-              <button className='absolute right-1 top-1 bottom-1 px-3 bg-brand-accent text-black rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-colors'>
+              <button className='absolute right-1 top-1 bottom-1 px-3 bg-brand-accent text-black rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-colors cursor-pointer'>
                 <Send className='w-3.5 h-3.5' />
               </button>
             </div>

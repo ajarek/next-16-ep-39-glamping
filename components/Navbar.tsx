@@ -122,7 +122,7 @@ export default function Navbar({ onBookNow }: NavbarProps) {
             </Link>
             <button
               onClick={onBookNow}
-              className="px-6 py-2.5 rounded-full text-xs font-semibold tracking-widest bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-brand-accent-fg transition-all duration-300 shadow-md hover:shadow-lg"
+              className="px-6 py-2.5 rounded-full text-xs font-semibold tracking-widest bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-white/70 transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer"
             >
               ZAREZERWUJ TERAZ
             </button>
@@ -135,7 +135,7 @@ export default function Navbar({ onBookNow }: NavbarProps) {
                   <div className="relative" ref={userMenuRef}>
                     <button
                       onClick={() => setShowUserMenu(!showUserMenu)}
-                      className="flex items-center gap-2 p-2.5 rounded-full border border-slate-700/80 bg-card-custom text-slate-900 shadow-sm hover:bg-brand-primary/10 transition-all duration-200 dark:border-brand-primary/40 dark:text-brand-primary"
+                      className="flex items-center gap-2 p-2.5 rounded-full border border-slate-700/80 bg-card-custom text-slate-900 shadow-sm hover:bg-brand-primary/10 transition-all duration-200 dark:border-brand-primary/40 dark:text-brand-primary cursor-pointer"
                       aria-label="Menu użytkownika"
                     >
                       <User className="w-4 h-4 text-slate-800 dark:text-white" />
@@ -179,7 +179,7 @@ export default function Navbar({ onBookNow }: NavbarProps) {
                           {/* Wyloguj */}
                           <button
                             onClick={handleLogout}
-                            className="w-full flex items-center gap-3 px-5 py-3 text-sm font-medium text-red-500 hover:bg-red-500/10 transition-colors"
+                            className="w-full flex items-center gap-3 px-5 py-3 text-sm font-medium text-red-500 hover:bg-red-500/10 transition-colors cursor-pointer"
                           >
                             <LogOut className="w-4 h-4" />
                             Wyloguj się
@@ -192,7 +192,7 @@ export default function Navbar({ onBookNow }: NavbarProps) {
                   /* Niezalogowany — przycisk logowania */
                   <button
                     onClick={() => setShowLoginModal(true)}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold tracking-widest border border-brand-primary/35 text-brand-primary hover:bg-brand-primary/10 transition-all duration-300"
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold tracking-widest border border-brand-primary/35 text-brand-primary hover:bg-brand-primary/10 transition-all duration-300 cursor-pointer"
                   >
                     <LogIn className="w-3.5 h-3.5" />
                     LOGUJ
@@ -210,7 +210,7 @@ export default function Navbar({ onBookNow }: NavbarProps) {
               <div className="relative" ref={userMenuRef}>
                 <button
                   onClick={() => setShowUserMenu(!showUserMenu)}
-                  className="p-2 rounded-full border border-slate-700/80 bg-card-custom text-slate-900 shadow-sm dark:border-brand-primary/40 dark:text-brand-accent"
+                  className="p-2 rounded-full border border-slate-700/80 bg-card-custom text-slate-900 shadow-sm dark:border-brand-primary/40 dark:text-brand-accent cursor-pointer"
                   aria-label="Menu użytkownika"
                 >
                   <User className="w-4 h-4" />
@@ -247,7 +247,7 @@ export default function Navbar({ onBookNow }: NavbarProps) {
                       )}
                       <button
                         onClick={handleLogout}
-                        className="w-full flex items-center gap-3 px-4 py-2.5 text-xs font-medium text-red-500 hover:bg-red-500/10 transition-colors"
+                        className="w-full flex items-center gap-3 px-4 py-2.5 text-xs font-medium text-red-500 hover:bg-red-500/10 transition-colors cursor-pointer"
                       >
                         <LogOut className="w-4 h-4" />
                         Wyloguj się
@@ -259,7 +259,7 @@ export default function Navbar({ onBookNow }: NavbarProps) {
             )}
             <button
               onClick={toggleMenu}
-              className="p-2 rounded-full border border-border-custom bg-card-custom text-fg-custom"
+              className="p-2 rounded-full border border-border-custom bg-card-custom text-fg-custom cursor-pointer"
               aria-label="Otwórz menu"
             >
               <Menu className="w-5 h-5" />
@@ -301,7 +301,7 @@ export default function Navbar({ onBookNow }: NavbarProps) {
                   </span>
                   <button
                     onClick={toggleMenu}
-                    className="p-1.5 rounded-full border border-border-custom hover:bg-brand-muted/10 text-fg-custom"
+                    className="p-1.5 rounded-full border border-border-custom hover:bg-brand-muted/10 text-fg-custom cursor-pointer"
                     aria-label="Zamknij menu"
                   >
                     <X className="w-5 h-5" />
@@ -353,7 +353,7 @@ export default function Navbar({ onBookNow }: NavbarProps) {
                           toggleMenu()
                           handleLogout()
                         }}
-                        className="w-full flex items-center justify-center gap-2 py-3 rounded-full text-xs font-bold tracking-widest border border-red-500/30 text-red-500 hover:bg-red-500/10 transition-all duration-300"
+                        className="w-full flex items-center justify-center gap-2 py-3 rounded-full text-xs font-bold tracking-widest border border-red-500/30 text-red-500 hover:bg-red-500/10 transition-all duration-300 cursor-pointer"
                       >
                         <LogOut className="w-4 h-4" />
                         WYLOGUJ ({user.email})
@@ -364,7 +364,7 @@ export default function Navbar({ onBookNow }: NavbarProps) {
                           toggleMenu()
                           setShowLoginModal(true)
                         }}
-                        className="w-full flex items-center justify-center gap-2 py-3 rounded-full text-xs font-bold tracking-widest bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-brand-accent-fg transition-all duration-300"
+                        className="w-full flex items-center justify-center gap-2 py-3 rounded-full text-xs font-bold tracking-widest bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-brand-accent-fg transition-all duration-300 cursor-pointer"
                       >
                         <LogIn className="w-4 h-4" />
                         LOGUJ / REJESTRUJ
@@ -377,7 +377,7 @@ export default function Navbar({ onBookNow }: NavbarProps) {
                     toggleMenu()
                     onBookNow()
                   }}
-                  className="w-full flex items-center justify-center gap-2 py-3 rounded-full text-xs font-bold tracking-widest bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-brand-accent-fg transition-all duration-300"
+                  className="w-full flex items-center justify-center gap-2 py-3 rounded-full text-xs font-bold tracking-widest bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-brand-accent-fg transition-all duration-300 cursor-pointer"
                 >
                   <Calendar className="w-4 h-4" />
                   ZAREZERWUJ TERAZ
@@ -464,7 +464,7 @@ function LoginFormModal({ onClose }: { onClose: () => void }) {
             <button
               key={m}
               onClick={() => setMode(m)}
-              className={`flex-1 py-2 rounded-xl text-xs font-bold tracking-wider transition-all duration-300 ${
+              className={`flex-1 py-2 rounded-xl text-xs font-bold tracking-wider transition-all duration-300 cursor-pointer ${
                 mode === m
                   ? "bg-slate-900 text-white dark:bg-brand-primary dark:text-brand-primary-fg shadow-sm"
                   : "text-slate-600 hover:text-slate-900 dark:text-fg-custom/50 dark:hover:text-fg-custom"
@@ -511,7 +511,7 @@ function LoginFormModal({ onClose }: { onClose: () => void }) {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-900 dark:text-fg-custom/40 dark:hover:text-fg-custom transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-900 dark:text-fg-custom/40 dark:hover:text-fg-custom transition-colors cursor-pointer"
               >
                 {showPassword ? (
                   <X className="w-4 h-4" />
@@ -524,7 +524,7 @@ function LoginFormModal({ onClose }: { onClose: () => void }) {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-3 rounded-full text-xs font-bold tracking-widest bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-brand-accent-fg transition-all duration-300 shadow-md disabled:opacity-60 flex items-center justify-center gap-2"
+            className="w-full py-3 rounded-full text-xs font-bold tracking-widest bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-brand-accent-fg transition-all duration-300 shadow-md disabled:opacity-60 flex items-center justify-center gap-2 cursor-pointer"
           >
             {isLoading ? (
               <motion.div
@@ -542,7 +542,7 @@ function LoginFormModal({ onClose }: { onClose: () => void }) {
 
         <button
           onClick={onClose}
-          className="mt-4 w-full text-center text-xs text-slate-500 hover:text-slate-900 dark:text-fg-custom/40 dark:hover:text-fg-custom transition-colors"
+          className="mt-4 w-full text-center text-xs text-slate-500 hover:text-slate-900 dark:text-fg-custom/40 dark:hover:text-fg-custom transition-colors cursor-pointer"
         >
           Zamknij
         </button>

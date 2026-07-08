@@ -204,7 +204,7 @@ function PricingStep({
           </span>
           <button
             onClick={() => setIsYearly(!isYearly)}
-            className='relative w-12 h-6 rounded-full bg-brand-primary p-1 focus:outline-none transition-colors duration-300'
+            className='relative w-12 h-6 rounded-full bg-brand-primary p-1 focus:outline-none transition-colors duration-300 cursor-pointer'
             aria-label='Przełącz okres rozliczeniowy'
           >
             <motion.div
@@ -280,7 +280,7 @@ function PricingStep({
 
               <button
                 onClick={() => onSelect(plan, isYearly)}
-                className={`mt-10 w-full py-3.5 rounded-full text-xs font-bold tracking-widest transition-all duration-300 flex items-center justify-center gap-2 ${
+                className={`mt-10 w-full py-3.5 rounded-full text-xs font-bold tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
                   plan.isPopular
                     ? "bg-brand-accent text-brand-accent-fg hover:bg-brand-primary hover:text-brand-primary-fg shadow-md hover:shadow-lg"
                     : "border border-border-custom text-fg-custom hover:bg-brand-muted/10"
@@ -389,7 +389,7 @@ function LoginStep({
             <button
               key={m}
               onClick={() => setMode(m)}
-              className={`flex-1 py-2 rounded-xl text-xs font-bold tracking-wider transition-all duration-300 ${
+              className={`flex-1 py-2 rounded-xl text-xs font-bold tracking-wider transition-all duration-300 cursor-pointer ${
                 mode === m
                   ? "bg-brand-primary text-brand-primary-fg shadow-sm"
                   : "text-fg-custom/50 hover:text-fg-custom"
@@ -439,7 +439,7 @@ function LoginStep({
               <button
                 type='button'
                 onClick={() => setShowPassword(!showPassword)}
-                className='absolute right-4 top-1/2 -translate-y-1/2 text-fg-custom/40 hover:text-fg-custom transition-colors'
+                className='absolute right-4 top-1/2 -translate-y-1/2 text-fg-custom/40 hover:text-fg-custom transition-colors cursor-pointer'
                 aria-label={showPassword ? "Ukryj hasło" : "Pokaż hasło"}
               >
                 {showPassword ? (
@@ -472,7 +472,7 @@ function LoginStep({
           <button
             type='submit'
             disabled={isLoading}
-            className='w-full py-3.5 rounded-full text-xs font-bold tracking-widest bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-brand-accent-fg transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed mt-2'
+            className='w-full py-3.5 rounded-full text-xs font-bold tracking-widest bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-brand-accent-fg transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed mt-2 cursor-pointer'
           >
             {isLoading ? (
               <span className='flex items-center justify-center gap-2'>
@@ -494,7 +494,7 @@ function LoginStep({
 
       <button
         onClick={onBack}
-        className='mt-6 flex items-center gap-2 text-xs text-fg-custom/50 hover:text-fg-custom transition-colors mx-auto'
+        className='mt-6 flex items-center gap-2 text-xs text-fg-custom/50 hover:text-fg-custom transition-colors mx-auto cursor-pointer'
       >
         <ArrowLeft className='w-3.5 h-3.5' />
         Wróć do wyboru planu
@@ -665,7 +665,7 @@ function PaymentStep({
           <button
             type='submit'
             disabled={isLoading}
-            className='w-full py-4 rounded-full text-sm font-bold tracking-widest bg-brand-accent text-brand-accent-fg hover:bg-brand-primary hover:text-brand-primary-fg transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed mt-4'
+            className='w-full py-4 rounded-full text-sm font-bold tracking-widest bg-brand-accent text-brand-accent-fg hover:bg-brand-primary hover:text-brand-primary-fg transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed mt-4 cursor-pointer'
           >
             {isLoading ? (
               <span className='flex items-center justify-center gap-2'>
@@ -685,7 +685,7 @@ function PaymentStep({
 
       <button
         onClick={onBack}
-        className='mt-6 flex items-center gap-2 text-xs text-fg-custom/50 hover:text-fg-custom transition-colors mx-auto'
+        className='mt-6 flex items-center gap-2 text-xs text-fg-custom/50 hover:text-fg-custom transition-colors mx-auto cursor-pointer'
       >
         <ArrowLeft className='w-3.5 h-3.5' />
         Wróć do logowania
@@ -970,7 +970,7 @@ function OfferFormStep({
           <button
             type='submit'
             disabled={isLoading}
-            className='w-full py-4 rounded-full text-sm font-bold tracking-widest bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-brand-accent-fg transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed'
+            className='w-full py-4 rounded-full text-sm font-bold tracking-widest bg-brand-primary text-brand-primary-fg hover:bg-brand-accent hover:text-brand-accent-fg transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer'
           >
             {isLoading ? (
               <span className='flex items-center justify-center gap-2'>
@@ -990,7 +990,7 @@ function OfferFormStep({
 
       <button
         onClick={onBack}
-        className='mt-6 flex items-center gap-2 text-xs text-fg-custom/50 hover:text-fg-custom transition-colors mx-auto'
+        className='mt-6 flex items-center gap-2 text-xs text-fg-custom/50 hover:text-fg-custom transition-colors mx-auto cursor-pointer'
       >
         <ArrowLeft className='w-3.5 h-3.5' />
         Wróć do płatności
