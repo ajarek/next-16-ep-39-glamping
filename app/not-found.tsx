@@ -26,7 +26,7 @@ export default function NotFound() {
         href='/'
         className='flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 bg-linear-to-r from-neonCyan to-neonBlue  font-rajdhani text-lg font-bold tracking-wider rounded-xl shadow-[0_0_20px_rgba(0,255,255,0.4)] hover:shadow-[0_0_30px_rgba(0,255,255,0.7)] hover:scale-105 active:scale-95 transition-all duration-300 group bg-primary'
       >
-        <span>Wróć na stronę główną</span>
+        <span className=' text-black dark:text-white'>Wróć na stronę główną</span>
         <ArrowRight className='w-5 h-5 group-hover:translate-x-1 transition-transform' />
       </Link>
     </main>
