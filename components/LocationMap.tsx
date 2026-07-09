@@ -196,7 +196,7 @@ export default function LocationMap({
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.95 }}
                       transition={{ duration: 0.2 }}
-                      className='absolute bottom-12 left-1/2 -translate-x-1/2 z-40 w-[240px] rounded-2xl overflow-hidden glass-effect-light border border-border-custom shadow-2xl p-3'
+                      className='absolute bottom-12 left-1/2 -translate-x-1/2 z-40 w-60 rounded-2xl overflow-hidden glass-effect-light border border-border-custom shadow-2xl p-3'
                     >
                       {/* Obrazek w popoverze */}
                       <div className='relative h-28 w-full rounded-lg overflow-hidden'>

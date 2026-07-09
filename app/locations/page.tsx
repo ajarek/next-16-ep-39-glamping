@@ -85,7 +85,9 @@ export default function LocationsPage() {
       {/* Wieloetapowy modal rezerwacji */}
       <BookingModal
         key={
-          isBookingOpen ? `locations-open-${selectedLocationId || "general"}` : "locations-closed"
+          isBookingOpen
+            ? `locations-open-${selectedLocationId || "general"}`
+            : "locations-closed"
         }
         isOpen={isBookingOpen}
         onClose={() => setIsBookingOpen(false)}

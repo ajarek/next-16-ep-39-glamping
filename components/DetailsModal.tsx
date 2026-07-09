@@ -50,7 +50,7 @@ export default function DetailsModal({
             </button>
 
             {/* Zdjęcie na górze */}
-            <div className='relative h-[280px] w-full shrink-0'>
+            <div className='relative h-70 w-full shrink-0'>
               <Image
                 src={location.image}
                 alt={location.name}

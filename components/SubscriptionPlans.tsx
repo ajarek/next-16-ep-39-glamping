@@ -64,7 +64,7 @@ export default function SubscriptionPlans() {
       className='py-24 px-6 bg-background transition-colors border-t border-border-custom relative overflow-hidden'
     >
       {/* Ozdobny rozbłysk w tle */}
-      <div className='absolute bottom-0 right-0 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-3xl pointer-events-none' />
+      <div className='absolute bottom-0 right-0 w-125 h-125 bg-brand-accent/5 rounded-full blur-3xl pointer-events-none' />
 
       <div className='max-w-7xl mx-auto relative z-10'>
         {/* Nagłówek Sekcji */}

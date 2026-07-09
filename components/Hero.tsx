@@ -17,7 +17,8 @@ const SLIDES = [
       "Ręcznie wybrane miejsca, gdzie piękno natury łączy się ze zrównoważonym komfortem.",
   },
   {
-    image: "https://hipcamp-res.cloudinary.com/images/f_auto,c_limit,w_3840,q_auto/v1684370012/campground-photos/ghyync4wbuzrpyezbdzu/luxury-glamping-at-nalu-retreat-nalu-retreat-nordic-spa.jpg",
+    image:
+      "https://hipcamp-res.cloudinary.com/images/f_auto,c_limit,w_3840,q_auto/v1684370012/campground-photos/ghyync4wbuzrpyezbdzu/luxury-glamping-at-nalu-retreat-nalu-retreat-nordic-spa.jpg",
     title: "Obudź się\nnad brzegiem jeziora",
     subtitle:
       "Doświadcz luksusu pośród szczytów górskich i krystalicznie czystej wody.",

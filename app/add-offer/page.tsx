@@ -257,9 +257,11 @@ function PricingStep({
 
                 <div className='mt-6 pb-6 border-b border-border-custom flex items-baseline gap-2'>
                   <span className='text-4xl font-black text-fg-custom tracking-tight'>
-                   {price}
+                    {price}
                   </span>
-                  <span className='text-xs text-fg-custom/60 ml-1 font-medium'>PLN</span>
+                  <span className='text-xs text-fg-custom/60 ml-1 font-medium'>
+                    PLN
+                  </span>
                   <span className='text-xs text-fg-custom/60 ml-2 font-medium'>
                     / miesiąc
                   </span>
@@ -574,10 +576,10 @@ function PaymentStep({
           </p>
         </div>
         <div className='text-right'>
-          <span className='text-3xl font-black text-brand-accent'>
-            {price}
+          <span className='text-3xl font-black text-brand-accent'>{price}</span>
+          <span className='text-xs text-fg-custom/60 ml-1 font-medium'>
+            PLN
           </span>
-          <span className='text-xs text-fg-custom/60 ml-1 font-medium'>PLN</span>
           <span className='text-xs text-fg-custom/50 ml-1'>/ mies.</span>
         </div>
       </div>
@@ -755,7 +757,9 @@ function OfferFormStep({
       onNext()
     } catch (err) {
       console.error("Błąd zapisu oferty:", err)
-      setSaveError("Nie udało się zapisać oferty w bazie danych. Spróbuj ponownie.")
+      setSaveError(
+        "Nie udało się zapisać oferty w bazie danych. Spróbuj ponownie.",
+      )
     } finally {
       setIsLoading(false)
     }
@@ -963,7 +967,8 @@ function OfferFormStep({
               />
             </div>
             <p className='mt-2 text-xs text-fg-custom/50'>
-              Podaj ścieżkę do obrazu, np. /images/forest-haven.png lub /public/images/nazwa.jpg.
+              Podaj ścieżkę do obrazu, np. /images/forest-haven.png lub
+              /public/images/nazwa.jpg.
             </p>
           </div>
 
@@ -1068,8 +1073,8 @@ export default function DodajOfertePage() {
     <div className='min-h-screen bg-bg-custom'>
       {/* Dekoracyjne tło */}
       <div className='fixed inset-0 pointer-events-none overflow-hidden'>
-        <div className='absolute top-0 right-0 w-[600px] h-[600px] bg-brand-accent/3 rounded-full blur-3xl' />
-        <div className='absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-primary/5 rounded-full blur-3xl' />
+        <div className='absolute top-0 right-0 w-150 h-150 bg-brand-accent/3 rounded-full blur-3xl' />
+        <div className='absolute bottom-0 left-0 w-125 h-125 bg-brand-primary/5 rounded-full blur-3xl' />
       </div>
 
       <div className='relative z-10 max-w-7xl mx-auto px-6 py-16'>

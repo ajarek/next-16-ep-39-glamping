@@ -1,6 +1,14 @@
 "use client"
 
-import React, { createContext, useContext, useEffect, useState } from "react"
+/* eslint-disable react-hooks/set-state-in-effect */
+
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react"
 
 type Theme = "dark" | "light"
 
@@ -13,18 +21,25 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // Inicjalizacja z "dark" zawsze — serwer i klient zaczynają tak samo
+  // Zawsze zaczynaj z "dark" — serwer i klient muszą renderować dokładnie to samo
   const [theme, setTheme] = useState<Theme>("dark")
-  const [mounted, setMounted] = useState(false)
+  const [mounted, setMounted] = useState<boolean>(false)
 
-  // Po zamontowaniu odczytujemy faktyczny motyw z localStorage
+  // Przywróć zapisany motyw synchronicznie przed renderem (unika hydration mismatch)
+  useLayoutEffect(() => {
+    const saved = localStorage.getItem("theme")
+    const savedTheme: Theme = saved === "light" ? "light" : "dark"
+    if (savedTheme !== "dark") {
+      setTheme(savedTheme)
+    }
+  }, [])
+
+  // Sygnalizuj koniec hydratacji po pierwszym renderze
   useEffect(() => {
-    const saved = (localStorage.getItem("theme") as Theme) ?? "dark"
-    setTheme(saved)
     setMounted(true)
   }, [])
 
-  // Synchronizujemy DOM i localStorage przy każdej zmianie motywu
+  // Synchronizujemy zmiany motywu z DOM i localStorage
   useEffect(() => {
     if (!mounted) return
     const root = window.document.documentElement

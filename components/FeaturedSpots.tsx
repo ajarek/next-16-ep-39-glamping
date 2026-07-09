@@ -8,22 +8,25 @@ import { Location } from "@/app/types"
 import locationsData from "@/public/data/locations.json"
 
 interface FeaturedSpotsProps {
+  locations: Location[]
   onSelectLocation: (id: string) => void
 }
 
 function getFeaturedSpots(locations: Location[]): Location[] {
-  return [...locations]
-    .sort((a, b) => b.rating - a.rating)
-    .slice(0, 3)
+  return [...locations].sort((a, b) => b.rating - a.rating).slice(0, 3)
 }
 
 export default function FeaturedSpots({
+  locations,
   onSelectLocation,
 }: FeaturedSpotsProps) {
   // Wybieramy 3 lokalizacje w stabilnej kolejności, aby uniknąć różnic między SSR a klientem
   const featured = useMemo(
-    () => getFeaturedSpots(locationsData as Location[]),
-    [],
+    () =>
+      getFeaturedSpots(
+        locations.length > 0 ? locations : (locationsData as Location[]),
+      ),
+    [locations],
   )
 
   // Środkowa karta jest aktywna domyślnie
@@ -31,10 +34,16 @@ export default function FeaturedSpots({
     () => featured[1]?.id ?? featured[0]?.id ?? "",
   )
 
+  const effectiveActiveId = featured.some((spot) => spot.id === activeId)
+    ? activeId
+    : (featured[1]?.id ?? featured[0]?.id ?? "")
+
   // Funkcja określająca pozycję i rotację karty w stosie 3D
   const getCardStyles = (id: string) => {
     const index = featured.findIndex((loc) => loc.id === id)
-    const activeIndex = featured.findIndex((loc) => loc.id === activeId)
+    const activeIndex = featured.findIndex(
+      (loc) => loc.id === effectiveActiveId,
+    )
 
     if (activeIndex === -1) {
       const total = featured.length

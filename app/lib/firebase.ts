@@ -15,9 +15,10 @@ const firebaseConfig = {
 }
 
 // Sprawdzamy, czy konfiguracja jest kompletna
-const isFirebaseConfigured =
-  !!(process.env.NEXT_PUBLIC_FIREBASE_API_KEY &&
-  process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID)
+const isFirebaseConfigured = !!(
+  process.env.NEXT_PUBLIC_FIREBASE_API_KEY &&
+  process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID
+)
 
 export interface MockUser {
   uid: string
@@ -107,18 +108,18 @@ class MockFirestore {
       string,
       unknown
     >[]
-    
+
     // Sprawdzamy, czy dokument o takim id już istnieje
     const id = (data.id as string) || `doc_${Date.now()}`
     const updatedData = { ...data, id }
-    
+
     const index = existing.findIndex((item) => item.id === id)
     if (index !== -1) {
       existing[index] = updatedData
     } else {
       existing.push(updatedData)
     }
-    
+
     localStorage.setItem(key, JSON.stringify(existing))
     return updatedData
   }
@@ -215,10 +216,11 @@ export async function getLocations(): Promise<Location[]> {
       return docs as unknown as Location[]
     } else {
       // Prawdziwy Firestore
-      const { collection, getDocs, doc, setDoc } = await import("firebase/firestore")
+      const { collection, getDocs, doc, setDoc } =
+        await import("firebase/firestore")
       const locationsCol = collection(firebaseDb, "locations")
       const querySnapshot = await getDocs(locationsCol)
-      
+
       if (querySnapshot.empty) {
         // Seedowanie prawdziwego Firestore
         const seeded: Location[] = []
@@ -246,7 +248,9 @@ export async function getLocations(): Promise<Location[]> {
 }
 
 // Helper do dodawania nowej lokalizacji (oferty)
-export async function addLocation(location: Omit<Location, "id"> & { id?: string }): Promise<Location> {
+export async function addLocation(
+  location: Omit<Location, "id"> & { id?: string },
+): Promise<Location> {
   const finalId = location.id || `loc-${Date.now()}`
   const finalLocation = { ...location, id: finalId }
 
@@ -270,7 +274,10 @@ export async function addLocation(location: Omit<Location, "id"> & { id?: string
 }
 
 // Helper do aktualizacji lokalizacji
-export async function updateLocation(id: string, data: Partial<Location>): Promise<void> {
+export async function updateLocation(
+  id: string,
+  data: Partial<Location>,
+): Promise<void> {
   try {
     if ("getDocs" in firebaseDb) {
       // Mock Firestore
@@ -347,7 +354,10 @@ export async function deleteBooking(id: string): Promise<void> {
       const docs = await firebaseDb.getDocs("bookings")
       const filtered = docs.filter((d) => d.id !== id)
       if (typeof window !== "undefined") {
-        localStorage.setItem("mock_firestore_bookings", JSON.stringify(filtered))
+        localStorage.setItem(
+          "mock_firestore_bookings",
+          JSON.stringify(filtered),
+        )
       }
     } else {
       const { doc, deleteDoc } = await import("firebase/firestore")
@@ -368,7 +378,10 @@ export async function deleteLocation(id: string): Promise<void> {
       const docs = await firebaseDb.getDocs("locations")
       const filtered = docs.filter((d) => d.id !== id)
       if (typeof window !== "undefined") {
-        localStorage.setItem("mock_firestore_locations", JSON.stringify(filtered))
+        localStorage.setItem(
+          "mock_firestore_locations",
+          JSON.stringify(filtered),
+        )
       }
     } else {
       // Prawdziwy Firestore
@@ -391,12 +404,16 @@ export async function isAdminUser(uid: string): Promise<boolean> {
       // Mock Firestore — sprawdzamy localStorage
       if (typeof window === "undefined") return false
       const key = "mock_firestore_users"
-      const users = JSON.parse(localStorage.getItem(key) || "[]") as Record<string, unknown>[]
+      const users = JSON.parse(localStorage.getItem(key) || "[]") as Record<
+        string,
+        unknown
+      >[]
       const userDoc = users.find((u) => u.uid === uid || u.id === uid)
       return userDoc?.role === "admin"
     } else {
       // Prawdziwy Firestore — szukamy po polu uid za pomocą query
-      const { collection, query, where, getDocs } = await import("firebase/firestore")
+      const { collection, query, where, getDocs } =
+        await import("firebase/firestore")
       const usersCol = collection(firebaseDb as Firestore, "users")
       const q = query(usersCol, where("uid", "==", uid))
       const querySnapshot = await getDocs(q)

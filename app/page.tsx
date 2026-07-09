@@ -54,6 +54,7 @@ export default function Home() {
 
       {/* Trójwymiarowy stos wyróżnionych kart (dane z locations.json, losowy wybór) */}
       <FeaturedSpots
+        locations={locations}
         onSelectLocation={handleSelectLocation}
       />
 
